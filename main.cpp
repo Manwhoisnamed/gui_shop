@@ -15,7 +15,12 @@
 
 //login buttton callback
 void login_button_clicked(Fl_Widget* w, void* data){
-    ((Fl_Box*)(((Fl_Group*)data)->child(2)))->label(((Fl_Input*)((Fl_Group*)data)->child(1))->value());
+    if(1337 == atof(((Fl_Input*)((Fl_Group*)data)->child(1))->value())){	
+	((Fl_Group*)data)->hide();
+    }
+    else{
+	((Fl_Box*)(((Fl_Group*)data)->child(2)))->label("Permission Denied!");
+    }
     ((Fl_Input*)(((Fl_Group*)data)->child(1)))->value("");
 }
 
@@ -44,13 +49,15 @@ int main(void){
     Fl_Input *login = new Fl_Input(450, 300, 100, 25, "Pin");
     Fl_Box *clearance = new Fl_Box(425, 250, 150, 25, "Project Manager");
     Fl_Button *change = new Fl_Button(275, 250, 150, 25, "Change Permissions");
-    Fl_Box *response = new Fl_Box(575, 300, 100, 25);
+    Fl_Box *response = new Fl_Box(575, 300, 150, 25);
 
     //groups all of the login widgets
     Fl_Group *login_group = new Fl_Group(0,0,1000,700);
     login_group->add(clearance);
     login_group->add(login);
     login_group->add(response);
+    login_group->add(login_button);
+    login_group->add(change);
 
     //sets the widgets
     clearance->box(FL_NO_BOX);
