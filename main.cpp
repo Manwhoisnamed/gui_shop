@@ -9,68 +9,134 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Group.H>
-#include <iostream>
+#include <Fl/Fl_Menu_Bar.H>
+#include <Fl/Fl_Menu_Item.H>
 
 //make callbacks
 
 //login buttton callback
 void login_button_clicked(Fl_Widget* w, void* data){
-    if(1337 == atof(((Fl_Input*)((Fl_Group*)data)->child(1))->value())){	
-	((Fl_Group*)data)->hide();
+    Fl_Window* login_window = (Fl_Window*) data;
+    Fl_Window* PM_Window = (Fl_Window*) (((Fl_Window*)(login_window->parent()))->child(1));
+    Fl_Box* response = (Fl_Box*) login_window->child(4);
+    Fl_Input* input = (Fl_Input*) login_window->child(1);
+    Fl_Window* father = (Fl_Window*)(login_window->parent());
+    if(1337 == atof(input->value())){	
+  	login_window->hide();
+	PM_Window->show();
+	father->label("Rob Robman's Rockin Roboshop - Project Manager");
     }
     else{
-	((Fl_Box*)(((Fl_Group*)data)->child(2)))->label("Permission Denied!");
+	response->labelcolor(FL_RED);
+	response->label("Permission Denied!");
     }
-    ((Fl_Input*)(((Fl_Group*)data)->child(1)))->value("");
+    input->value("");
+}
+
+//logs out of the current menu and goes back to the main menu
+void logout_button_clicked(Fl_Widget* w, void* current){
+    Fl_Window* current_window = (Fl_Window*) current;
+    Fl_Window* login_window = (Fl_Window*) (((Fl_Window*)(current_window->parent()))->child(0));
+    Fl_Window* father = (Fl_Window*)(login_window->parent());
+    current_window->hide();
+    login_window->show();
+    father->label("Rob Robman's Rockin Roboshop - Login"); 
 }
 
 //callback to change the permissions
 void change_permissions(Fl_Widget* w, void* data){
     static int perms = 0;
     perms++;
+    Fl_Box* status = (Fl_Box*) data;
     if(perms == 3){
 	perms = 0;
     }
     if(perms == 0){
-	((Fl_Box*)data)->label("Project Manager");
+	status->label("Project Manager");
     }
     else if(perms == 1){
-	((Fl_Box*)data)->label("Beloved Customer");
+	status->label("Beloved Customer");
     }
     else if(perms == 2){
-	((Fl_Box*)data)->label("Sales Associate");
+	status->label("Sales Associate");
     }
 }
 
 int main(void){
-    //creates windows and widgets
-    Fl_Window *window = new Fl_Window(1000,700);
+
+    Fl_Window* father = new Fl_Window(1000,700, "Rob Robman's Rockin Roboshop - Login");
+    father->end();
+
+////////////////////////////////////////////////////////////////////
+
+    //creates login window and widgets
+    Fl_Window *login_window = new Fl_Window(1000,700);
     Fl_Return_Button *login_button = new Fl_Return_Button(450,350,100,50,"Login");
     Fl_Input *login = new Fl_Input(450, 300, 100, 25, "Pin");
     Fl_Box *clearance = new Fl_Box(425, 250, 150, 25, "Project Manager");
     Fl_Button *change = new Fl_Button(275, 250, 150, 25, "Change Permissions");
     Fl_Box *response = new Fl_Box(575, 300, 150, 25);
 
-    //groups all of the login widgets
-    Fl_Group *login_group = new Fl_Group(0,0,1000,700);
-    login_group->add(clearance);
-    login_group->add(login);
-    login_group->add(response);
-    login_group->add(login_button);
-    login_group->add(change);
-
     //sets the widgets
-    clearance->box(FL_NO_BOX);
-    response->box(FL_NO_BOX);
-    window->label("Rob Robman's Rockin Robo Shop - Login");
 
     //set callbacks
-    login_button->callback(login_button_clicked, (void*) login_group);
+    login_button->callback(login_button_clicked, (void*) login_window);
     change->callback(change_permissions, (void*) clearance);
 
-    //let this thing run
-    window->end();
-    window->show();
+    //end the grouping and add the window to the main group
+    login_window->end();
+    father->add(login_window);
+   
+/////////////////////////////////////////////////////////////////////
+
+    //creates the PM window and widgets
+    Fl_Window *PM_Window = new Fl_Window(1000,700);
+    Fl_Button *logout = new Fl_Button(910,660,80,30, "Logout");   
+    Fl_Menu_Bar *menu = new Fl_Menu_Bar(0,0,1000,20);
+    Fl_Menu_Item manage[] = {
+	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
+	{"Create &Arm",FL_ALT+'a', 0, 0},
+	{"Create &Battery",FL_ALT+'b', 0, 0},
+	{"Create &Head",FL_ALT+'h', 0, 0},
+	{"Create &Leg",FL_ALT+'l', 0, 0},
+	{"Create &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
+	{"Create &RoboModel",FL_ALT+'r', 0, 0},
+	{0},
+	{"&Storage",FL_ALT+'s', 0, 0, FL_SUBMENU},	
+	{"View &Arm",FL_ALT+'a', 0, 0},
+	{"View &Battery",FL_ALT+'b', 0, 0},
+	{"View &Head",FL_ALT+'h', 0, 0},
+	{"View &Leg",FL_ALT+'l', 0, 0},
+	{"View &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
+	{"View &RoboModel",FL_ALT+'r', 0, 0},
+	{0},
+	{0}
+    };
+ 
+    //sets the widgets
+    menu->menu(manage);
+  
+    //set callbacks
+    logout->callback(logout_button_clicked, PM_Window);
+
+    //end the grouping and add the window to the main group
+    PM_Window->end();
+    father->add(PM_Window);
+
+/////////////////////////////////////////////////////////////////////
+
+    //creates the PM window and widgets
+    
+    //sets the widgets
+  
+    //set callbacks
+  
+    //end the grouping and add the window to the main group
+
+/////////////////////////////////////////////////////////////////////
+
+    father->show();
+    login_window->show();
     return Fl::run();
 }
 
