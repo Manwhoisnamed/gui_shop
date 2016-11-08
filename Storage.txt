@@ -1,0 +1,123 @@
+ARMS==========================
+45 12 532 1 20 1
+arm of awesome
+pretty awesome
+123 2 1 1 45 1
+
+
+1234 45 45 45 60 1
+arm1
+arm
+89 45 45 900 1000 1
+arm
+arm
+-1
+HEADS=========================
+20 3 2 1 1
+head
+shoulders knees and toes
+-1
+TORSOS========================
+100 20 2 4 1
+torso of cool
+really cool
+434343434 2 3 3 2
+Ted
+nah fam
+-1
+LEGS==========================
+59 30 58 2 40 67
+1
+a leg
+-1
+BATTERIES=====================
+39 3 3 80
+ihdfs
+garble
+123 500 0.001 70000
+party mcpart
+this part is the best budget battery we have
+-1
+ROBOMODELS====================
+torso-----------
+100 20 1 4 2
+torso of cool
+really cool
+leg-------------
+59 30 67 2 40 58
+1
+a leg
+head------------
+20 3 1 4 58
+head
+shoulders knees and toes
+arms------------
+45 12 1 1 20 532
+arm of awesome
+pretty awesome
+45 12 1 1 20 532
+arm of awesome
+pretty awesome
+-2
+batteries-------
+39 3 80 3
+ihdfs
+garble
+-2
+4567 56
+model
+description
+torso-----------
+100 20 1 4 2
+torso of cool
+really cool
+leg-------------
+59 30 67 2 40 58
+1
+a leg
+head------------
+20 3 1 4 58
+head
+shoulders knees and toes
+arms------------
+45 12 1 1 20 532
+arm of awesome
+pretty awesome
+45 12 1 1 20 532
+arm of awesome
+pretty awesome
+-2
+batteries-------
+123 500 70000 0.001
+party mcpart
+this part is the best budget battery we have
+-2
+1200 123
+awesome model
+really super good
+torso-----------
+434343434 2 2 3 3
+Ted
+nah fam
+leg-------------
+59 30 67 2 40 58
+1
+a leg
+head------------
+1234 45 1 3 58
+head
+head
+arms------------
+1234 45 1 45 60 45
+arm1
+arm
+-2
+batteries-------
+123 500 70000 0.001
+party mcpart
+this part is the best budget battery we have
+-2
+670 1234
+robomodel
+robomodel
+-1
