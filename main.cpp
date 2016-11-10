@@ -1,22 +1,17 @@
-//maxwell Sanders 1001069652
-//This is the main it starts the program and makes all the windows
+//maxwell sanders 1001069652
+//this is the main file
 
 #include "globals.h"
 #include "login.h"
-#include "workshop.h"
 #include "pos.h"
 #include "salesfloor.h"
-#include <iostream>
+#include "workshop.h"
 
 int main(void){
-    storage.load();
     login login_win;
-    workshop workshop_win;
-    pos POS_win;
-    salesfloor salesfloor_win;
+    pos pos_win;
+    salesfloor sales_win;
+    workshop pm_win;
     login_win.show();
-    workshop_win.show();
-    POS_win.show();
-    salesfloor_win.show();
     Fl::run();
 }

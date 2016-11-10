@@ -18,6 +18,19 @@ class login : public Fl_Window{
     Fl_Box clearance;
     Fl_Button change;
     Fl_Box response;    
+    inline void progress_i(){
+	if(strcmp(clearance.label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
+	    response.label("Permission granted");
+	}
+	else{
+	    response.labelcolor(FL_RED);
+	    response.label("Permission denied");
+	}
+	pin_field.value("");
+    };
+    static void progress(Fl_Widget* w, void* data){
+	((login*)data)->progress_i();	
+    };        
     public:
 	login() :
 	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - login"),
@@ -25,7 +38,9 @@ class login : public Fl_Window{
         pin_field(450, 300, 100, 25, "Pin"),
         clearance(425, 250, 150, 25, "Project Manager"),
         change(275, 250, 150, 25, "Change Permissions"),
-        response(575, 300, 150,25,"currently uninstantiated"){
+        response(575, 300, 150,25,""){
+	login_button.callback(progress,this);
+	end();
         };
 };
 #endif
