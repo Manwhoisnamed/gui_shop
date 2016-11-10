@@ -8,10 +8,9 @@
 #include "workshop.h"
 
 int main(void){
-    login login_win;
     pos pos_win;
     salesfloor sales_win;
     workshop pm_win;
-    login_win.show();
+    pm_win.show();
     Fl::run();
 }

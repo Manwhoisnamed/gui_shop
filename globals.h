@@ -2,8 +2,10 @@
 //this is the file that holds my global variables, really just my storage and database
 
 #include "Storage.h"
+#include "login.h"
 
 #ifndef __globals_H
 #define __globals_H 2016
 Storage storage;
+login login_win;
 #endif

@@ -11,6 +11,7 @@
 #include <Fl/Fl_Choice.H>
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
+#include "globals.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -36,12 +37,21 @@ class workshop : public Fl_Window{
 	{0},
 	{0}
     };
+    inline void logout_clicked_i(){
+	this->hide();
+	login_win.show();
+    }
+    static void logout_clicked(Fl_Widget*w, void*data){
+	((workshop*)data)->logout_clicked_i();
+    }
+
    public:
 	workshop() :
 	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - workshop"),
 	logout(910,660,80,30, "Logout"),
 	menu(0,0,1000,20){
 	    menu.menu(manage);
+	    logout.callback(logout_clicked, this);
         };
 };
 #endif
