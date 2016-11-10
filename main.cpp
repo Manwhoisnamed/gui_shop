@@ -2,15 +2,11 @@
 //this is the main file
 
 #include "globals.h"
-#include "login.h"
-#include "pos.h"
-#include "salesfloor.h"
-#include "workshop.h"
+#include "father.h"
 
 int main(void){
-    pos pos_win;
-    salesfloor sales_win;
-    workshop pm_win;
-    pm_win.show();
+    father father_win;
+    father_win.show();
+    (father_win.child(0))->show();
     Fl::run();
 }

@@ -11,6 +11,7 @@
 #include <Fl/Fl_Choice.H>
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
+#include "globals.h"
 
 #ifndef __pos_H
 #define __pos_H 2016
@@ -27,12 +28,21 @@ class pos : public Fl_Window{
 	{"&View Orders",FL_ALT+'v', 0, 0},
 	{"&View Catalogue",FL_ALT+'c', 0, 0},
     };
-   public:
+    inline void logout_clicked_i(){
+	this->hide();
+	((this->parent())->child(0))->show();
+    }
+    static void logout_clicked(Fl_Widget*w, void*data){
+	((pos*)data)->logout_clicked_i();
+    }
+
+  public:
 	pos() :
 	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - point of sale"),
 	logout(910,660,80,30, "Logout"),
 	menu(0,0,1000,20){
 	    menu.menu(commands);
+	    logout.callback(logout_clicked, this);
         };
 };
 #endif

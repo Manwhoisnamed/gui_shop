@@ -39,7 +39,7 @@ class workshop : public Fl_Window{
     };
     inline void logout_clicked_i(){
 	this->hide();
-	login_win.show();
+	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){
 	((workshop*)data)->logout_clicked_i();

@@ -11,6 +11,7 @@
 #include <Fl/Fl_Choice.H>
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
+#include "globals.h"
 
 #ifndef __salesfloor_H
 #define __salesfloor_H 2016
@@ -29,12 +30,21 @@ class salesfloor : public Fl_Window{
 	{0},
 	{0},
     };
-   public:
+    inline void logout_clicked_i(){
+	this->hide();
+	((this->parent())->child(0))->show();
+    }
+    static void logout_clicked(Fl_Widget*w, void*data){
+	((salesfloor*)data)->logout_clicked_i();
+    }
+
+  public:
 	salesfloor() :
 	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - salesfloor"),
 	logout(910,660,80,30, "Logout"),
 	menu(0,0,1000,20){
 	    menu.menu(commands);
+	    logout.callback(logout_clicked, this);
         };
 };
 #endif

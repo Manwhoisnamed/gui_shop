@@ -26,8 +26,16 @@ class login : public Fl_Window{
     };	
     inline void progress_i(){
 	if(strcmp(choices[clearance.value()].label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
-	    response.labelcolor(FL_GREEN);
-	    response.label("Permission granted");
+       	    this->hide();
+	    ((this->parent())->child(1))->show();
+	}
+	else if(strcmp(choices[clearance.value()].label(), "Beloved Customer") == 0 && strcmp(pin_field.value(), "1337") == 0){
+       	    this->hide();
+	    ((this->parent())->child(3))->show();
+	}
+	else if(strcmp(choices[clearance.value()].label(), "Sales Associate") == 0 && strcmp(pin_field.value(), "1337") == 0){
+       	    this->hide();
+	    ((this->parent())->child(2))->show();
 	}
 	else{
 	    response.labelcolor(FL_RED);
