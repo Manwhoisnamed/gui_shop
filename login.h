@@ -15,11 +15,18 @@
 class login : public Fl_Window{
     Fl_Return_Button login_button;
     Fl_Input pin_field;
-    Fl_Box clearance;
-    Fl_Button change;
+    Fl_Choice clearance;
     Fl_Box response;    
+    Fl_Menu_Item choices[5] = {
+	{"Project Manager"},
+	{"Beloved Customer"},
+	{"Sales Associate"},
+	{"Bossy Bossman"},
+	{0}
+    };	
     inline void progress_i(){
-	if(strcmp(clearance.label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
+	if(strcmp(choices[clearance.value()].label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
+	    response.labelcolor(FL_GREEN);
 	    response.label("Permission granted");
 	}
 	else{
@@ -36,10 +43,10 @@ class login : public Fl_Window{
 	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - login"),
 	login_button(450,350,100,50,"Login"),
         pin_field(450, 300, 100, 25, "Pin"),
-        clearance(425, 250, 150, 25, "Project Manager"),
-        change(275, 250, 150, 25, "Change Permissions"),
+        clearance(425, 250, 150, 25),
         response(575, 300, 150,25,""){
 	login_button.callback(progress,this);
+	clearance.menu(choices);
 	end();
         };
 };
