@@ -27,14 +27,17 @@ class login : public Fl_Window{
     inline void progress_i(){
 	if(strcmp(choices[clearance.value()].label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
        	    this->hide();
+	    response.label("");
 	    ((this->parent())->child(1))->show();
 	}
 	else if(strcmp(choices[clearance.value()].label(), "Beloved Customer") == 0 && strcmp(pin_field.value(), "1337") == 0){
        	    this->hide();
+	    response.label("");
 	    ((this->parent())->child(3))->show();
 	}
 	else if(strcmp(choices[clearance.value()].label(), "Sales Associate") == 0 && strcmp(pin_field.value(), "1337") == 0){
        	    this->hide();
+	    response.label("");
 	    ((this->parent())->child(2))->show();
 	}
 	else{

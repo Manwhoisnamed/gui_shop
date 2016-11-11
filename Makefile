@@ -37,8 +37,8 @@ Battery.o: Battery.cpp
 Torso.o: Torso.cpp
 	$(CXX) -c $(CXXOPTS) $(fltk-config -cxxflags) Torso.cpp
 
-sweep:
-	rm main.o
+res:
+	rm main.o ; make
 
 clean:
 	-rm -f *.o shop *.h.gch
