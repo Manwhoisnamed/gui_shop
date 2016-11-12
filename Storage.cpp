@@ -196,6 +196,12 @@ void Storage::load(){
    string name;
    string description = "";
    string buffer;
+   arms.clear();
+   legs.clear();
+   batteries.clear();
+   heads.clear();
+   torsos.clear();
+   robomodels.clear();
 
    //gets the arms
    getline(myfile,line);

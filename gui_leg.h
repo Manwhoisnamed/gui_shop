@@ -39,7 +39,6 @@ class gui_leg : public Fl_Window{
 	bool valid = true;
 	int isn;
 	double iweight, icost, pass, act, ispeed;
-	bool ilaser = false;
 	if(strlen(name.value()) == 0){
 	    name_response.labelcolor(FL_RED);
 	    name_response.label("Needs Name");
@@ -109,7 +108,7 @@ class gui_leg : public Fl_Window{
 	    valid = false;
 	}
 	if(valid){
-	    Leg leg(name.value(), isn, iweight, icost, description.value(), pass, act, ilaser);
+	    Leg leg(name.value(), isn, iweight, icost, description.value(), pass, act, ispeed);
 	    storage.addLeg(leg);	    
 	    storage.store();
 	    this->hide();
