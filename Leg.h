@@ -17,6 +17,5 @@
     double getpassiveDraw();
     double getactiveDraw();
     int getSpeed();
-    string getType() override;
  };
  #endif

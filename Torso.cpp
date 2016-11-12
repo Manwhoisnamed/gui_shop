@@ -4,10 +4,6 @@
  
  using namespace std;
 
- string Torso::getType(){
-	return "torso";
- }
-
  double Torso::getDraw(){
  	return Torso::draw;
  }

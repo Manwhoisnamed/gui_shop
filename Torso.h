@@ -16,6 +16,5 @@
     int getBSpace();
     int getASockets();
     int getLSockets();
-    string getType() override;
  };
  #endif
