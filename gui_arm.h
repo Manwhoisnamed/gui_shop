@@ -49,9 +49,13 @@ class gui_arm : public Fl_Window{
 	    sn_response.label("Needs Integer");
 	    valid = false;
 	}	
+	else if(storage.checkArms(atoi(SN.value()))){
+	    sn_response.labelcolor(FL_RED);
+	    sn_response.label("SN in use");
+	    valid = false;
+	}
 	else{
 	    sn_response.label("");
-	    isn = atoi(SN.value());
 	}
  	if(!isDouble(cost.value())){
 	    cost_response.labelcolor(FL_RED);

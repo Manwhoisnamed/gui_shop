@@ -1,16 +1,27 @@
 ARMS==========================
 45 12 532 1 20 1
 arm of awesome
-pretty awesome
-1234 45 45 45 60 1
-arm1
-arm
-89 45 45 900 1000 1
-arm
-arm
-45 51 15 15 41 1
-asduof
-sfdg
+saduoh
+-2end
+0 15 21 6 45 0
+woohoo
+this is 
+as
+crazy
+as socks
+-2end
+0 54 5195 45 62 1
+ahsd
+this is 
+a 
+multi
+line 
+input
+-2end
+0 44 44 44 44 0
+dsuoafb
+sdof
+-2end
 -1
 HEADS=========================
 20 3 2 1 1

@@ -102,6 +102,7 @@ void Storage::store(){
 	myfile << arms.at(i).getSN() << " " << arms.at(i).getWeight() << " " << arms.at(i).getCost() << " " << arms.at(i).getpassiveDraw() << " " << arms.at(i).getactiveDraw() << " " << arms.at(i).getLaser() << "\n"; 
         myfile << arms.at(i).getName() << "\n";
         myfile << arms.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
     }
     myfile << "-1\n";
 
@@ -189,7 +190,8 @@ void Storage::load(){
    double weight, cost, charge, draw, passiveDraw, activeDraw;
    int laser, SN, batteryspace, speed, MN, price;
    string name;
-   string description;
+   string description = "";
+   string buffer;
 
    //gets the arms
    getline(myfile,line);
@@ -202,6 +204,13 @@ void Storage::load(){
 	iss >> SN >> weight >> cost >> passiveDraw >> activeDraw >> laser;
 	getline(myfile,name);
 	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
 	Arm arm(name, SN, weight, cost, description, passiveDraw, activeDraw, laser);
 	Storage::arms.push_back(arm);
    }
