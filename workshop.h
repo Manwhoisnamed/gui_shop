@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "gui_arm.h"
 #include "gui_leg.h"
+#include "gui_head.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -22,11 +23,12 @@ class workshop : public Fl_Window{
     Fl_Menu_Bar menu;
     gui_arm arm_win;
     gui_leg leg_win;
+    gui_head head_win;
     Fl_Menu_Item manage[17] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
 	{"Create &Battery",FL_ALT+'b', 0, 0},
-	{"Create &Head",FL_ALT+'h', 0, 0},
+	{"Create &Head",FL_ALT+'h', make_gui_head, this},
 	{"Create &Leg",FL_ALT+'l', make_gui_leg, this},
 	{"Create &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
 	{"Create &RoboModel",FL_ALT+'r', 0, 0},
@@ -56,6 +58,14 @@ class workshop : public Fl_Window{
 	((workshop*)data)->make_gui_leg_i();
     }
 
+    inline void make_gui_head_i(){
+	head_win.show();
+    }
+    static void make_gui_head(Fl_Widget*w, void*data){
+	((workshop*)data)->make_gui_head_i();
+    }
+
+   public:
     inline void make_gui_arm_i(){
 	arm_win.show();
     }
