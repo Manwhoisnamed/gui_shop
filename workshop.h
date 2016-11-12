@@ -91,6 +91,7 @@ class workshop : public Fl_Window{
 
     //callback combo to make a gui arm
     inline void make_gui_arm_i(){
+	arm_win.clear_fields();
 	arm_win.show();
     }
     static void make_gui_arm(Fl_Widget*w, void*data){

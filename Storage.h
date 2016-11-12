@@ -25,7 +25,6 @@
   public:
     //the usage suite
     Storage(){};
-    void useStorage();
 
     //the sizing suite
     int armSize();

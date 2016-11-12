@@ -6,6 +6,7 @@
 
 int main(void){
     father father_win;
+    storage.load();
     father_win.show();
     (father_win.child(0))->show();
     Fl::run();
