@@ -15,7 +15,7 @@ class father : public Fl_Window{
     salesfloor customer_win;
     public:
         father() 
-        : Fl_Window(1000,700){
+        : Fl_Window(1000,700, "Rob Robman's Rockin Roboshop System"){
 	    this->add(login_win);
 	    this->add(pm_win);
 	    this->add(sales_win);

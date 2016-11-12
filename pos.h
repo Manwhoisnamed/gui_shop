@@ -38,7 +38,7 @@ class pos : public Fl_Window{
 
   public:
 	pos() :
-	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - point of sale"),
+	Fl_Window(1000,700),
 	logout(910,660,80,30, "Logout"),
 	menu(0,0,1000,20){
 	    menu.menu(commands);

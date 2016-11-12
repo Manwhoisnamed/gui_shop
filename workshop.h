@@ -15,6 +15,8 @@
 #include "gui_arm.h"
 #include "gui_leg.h"
 #include "gui_head.h"
+#include "gui_battery.h"
+#include "gui_torso.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -24,13 +26,15 @@ class workshop : public Fl_Window{
     gui_arm arm_win;
     gui_leg leg_win;
     gui_head head_win;
+    gui_battery battery_win;
+    gui_torso torso_win;
     Fl_Menu_Item manage[17] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
-	{"Create &Battery",FL_ALT+'b', 0, 0},
+	{"Create &Battery",FL_ALT+'b', make_gui_battery, this},
 	{"Create &Head",FL_ALT+'h', make_gui_head, this},
 	{"Create &Leg",FL_ALT+'l', make_gui_leg, this},
-	{"Create &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
+	{"Create &Torso",FL_ALT+'t', make_gui_torso, this, FL_MENU_DIVIDER},
 	{"Create &RoboModel",FL_ALT+'r', 0, 0},
 	{0},
 	{"&Storage",FL_ALT+'s', 0, 0, FL_SUBMENU},	
@@ -43,6 +47,8 @@ class workshop : public Fl_Window{
 	{0},
 	{0}
     };
+
+    //callback combo for the logout button
     inline void logout_clicked_i(){
 	this->hide();
 	((this->parent())->child(0))->show();
@@ -51,6 +57,7 @@ class workshop : public Fl_Window{
 	((workshop*)data)->logout_clicked_i();
     }
 
+    //callback combo to make a gui leg window
     inline void make_gui_leg_i(){
 	leg_win.show();
     }
@@ -58,6 +65,15 @@ class workshop : public Fl_Window{
 	((workshop*)data)->make_gui_leg_i();
     }
 
+    //callback combo to make a gui battery
+    inline void make_gui_battery_i(){
+	battery_win.show();
+    }
+    static void make_gui_battery(Fl_Widget*w, void*data){
+	((workshop*)data)->make_gui_battery_i();
+    }
+
+    //callback combo to make a gui head
     inline void make_gui_head_i(){
 	head_win.show();
     }
@@ -65,7 +81,15 @@ class workshop : public Fl_Window{
 	((workshop*)data)->make_gui_head_i();
     }
 
-   public:
+    //callback combo to make a gui torso
+    inline void make_gui_torso_i(){
+	torso_win.show();
+    }
+    static void make_gui_torso(Fl_Widget*w, void*data){
+	((workshop*)data)->make_gui_torso_i();
+    }
+
+    //callback combo to make a gui arm
     inline void make_gui_arm_i(){
 	arm_win.show();
     }
@@ -75,7 +99,7 @@ class workshop : public Fl_Window{
 
    public:
 	workshop() :
-	Fl_Window(1000,700,"Rob Robman's Rockin RoboShop - workshop"),
+	Fl_Window(1000,700),
 	logout(910,660,80,30, "Logout"),
 	menu(0,0,1000,20){
 	    menu.menu(manage);
