@@ -112,6 +112,7 @@ void Storage::store(){
 	myfile << heads.at(i).getSN() << " " << heads.at(i).getWeight() << " " << heads.at(i).getCost() << " " << heads.at(i).getDraw() << " " << heads.at(i).getLaser() << "\n"; 
         myfile << heads.at(i).getName() << "\n";
         myfile << heads.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
     }
     myfile << "-1\n";
 
@@ -121,6 +122,7 @@ void Storage::store(){
 	myfile << torsos.at(i).getSN() << " " << torsos.at(i).getWeight() << " " << torsos.at(i).getCost() << " " << torsos.at(i).getDraw() << " " << torsos.at(i).getBSpace() << "\n"; 
         myfile << torsos.at(i).getName() << "\n";
         myfile << torsos.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
     }
     myfile << "-1\n";
 
@@ -130,6 +132,7 @@ void Storage::store(){
 	myfile << legs.at(i).getSN() << " " << legs.at(i).getWeight() << " " << legs.at(i).getCost() << " " << legs.at(i).getpassiveDraw() << " " << legs.at(i).getactiveDraw() << " " << legs.at(i).getSpeed() << "\n"; 
         myfile << legs.at(i).getName() << "\n";
         myfile << legs.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
     }
     myfile << "-1\n";
     
@@ -139,6 +142,7 @@ void Storage::store(){
 	myfile << batteries.at(i).getSN() << " " << batteries.at(i).getWeight() << " " << batteries.at(i).getCost() << " " << batteries.at(i).getCharge() << "\n"; 
         myfile << batteries.at(i).getName() << "\n";
         myfile << batteries.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
     }
     myfile << "-1\n";
 
@@ -226,6 +230,13 @@ void Storage::load(){
 	iss >> SN >> weight >> cost >> draw >> laser;
 	getline(myfile,name);
 	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
 	Head head(name, SN, weight, cost, description, draw, laser);
 	Storage::heads.push_back(head);
    }
@@ -241,6 +252,13 @@ void Storage::load(){
 	iss >> SN >> weight >> cost >> draw >> batteryspace;
 	getline(myfile,name);
 	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
 	Torso torso(name, SN, weight, cost, description, draw, batteryspace);
 	Storage::torsos.push_back(torso);
    }
@@ -256,6 +274,13 @@ void Storage::load(){
 	iss >> SN >> weight >> cost >> passiveDraw >> activeDraw >> speed;
 	getline(myfile,name);
 	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
 	Leg leg(name, SN, weight, cost, description, passiveDraw, activeDraw, speed);
 	Storage::legs.push_back(leg);
    }
@@ -271,6 +296,13 @@ void Storage::load(){
 	iss >> SN >> weight >> cost >> charge;
 	getline(myfile,name);
 	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
 	Battery battery(name, SN, weight, cost, description, charge);
 	Storage::batteries.push_back(battery);
    }

@@ -27,27 +27,33 @@ HEADS=========================
 20 3 2 1 1
 head
 shoulders knees and toes
+-2end
 -1
 TORSOS========================
 100 20 2 4 1
 torso of cool
 really cool
+-2end
 434343434 2 3 3 2
 Ted
 nah fam
+-2end
 -1
 LEGS==========================
 59 30 58 2 40 67
 1
 a leg
+-2end
 -1
 BATTERIES=====================
 39 3 3 80
 ihdfs
 garble
+-2end
 123 500 0.001 70000
 party mcpart
 this part is the best budget battery we have
+-2end
 -1
 ROBOMODELS====================
 torso-----------
