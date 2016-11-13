@@ -23,6 +23,34 @@ class view_arm : public Fl_Group{
 	Fl_Output cost;
 	Fl_Output weight;
 	Fl_Box laser;
+	int i = 0;
+
+	inline void right_clicked_i(){
+	    i++;
+	    if(i == storage.armSize() - 1){
+		right.deactivate();
+	    }
+	    else{
+		left.activate();
+	    }
+	};
+	static void right_clicked(Fl_Widget* w, void* data){
+	    ((view_arm*)data)->right_clicked_i();
+	};
+
+	inline void left_clicked_i(){
+	    i--;
+	    if(i == 0){
+		left.deactivate();
+	    }
+	    else{
+		right.activate();
+	    }
+	};
+	static void left_clicked(Fl_Widget* w, void* data){
+	    ((view_arm*)data)->left_clicked_i();
+	};
+
     public:
 	view_arm():
 	Fl_Group(0,0,1000,700),
@@ -39,28 +67,31 @@ class view_arm : public Fl_Group{
 	    reset_values();
 	    laser.labelcolor(FL_RED);
 	    left.deactivate();
+	    left.callback(left_clicked,this);
+	    right.callback(right_clicked,this);
 	}
 
 	void reset_values(){
+	    i = 0;
 	    string sSN;
 	    string scost;
 	    string sweight;
 	    string spassiveDraw;
 	    string sactiveDraw;
-	    if(storage.armSize() != 0){
-	 	name.value((storage.getArm(0)).getName().c_str());
-	 	description.value((storage.getArm(0)).getDescription().c_str());
-		sSN = to_string(storage.getArm(0).getSN());
-		scost = to_string(storage.getArm(0).getCost());
-		sweight = to_string(storage.getArm(0).getWeight());
-		spassiveDraw = to_string(storage.getArm(0).getpassiveDraw());
-		sactiveDraw = to_string(storage.getArm(0).getactiveDraw());
+	    if(storage.armSize() > 0){
+	 	name.value((storage.getArm(i)).getName().c_str());
+	 	description.value((storage.getArm(i)).getDescription().c_str());
+		sSN = to_string(storage.getArm(i).getSN());
+		scost = to_string(storage.getArm(i).getCost());
+		sweight = to_string(storage.getArm(i).getWeight());
+		spassiveDraw = to_string(storage.getArm(i).getpassiveDraw());
+		sactiveDraw = to_string(storage.getArm(i).getactiveDraw());
 		SN.value(sSN.c_str());
 		cost.value(scost.c_str());
 		weight.value(sweight.c_str());
 		passiveDraw.value(spassiveDraw.c_str());
 		activeDraw.value(sactiveDraw.c_str());
-	 	if(storage.getArm(0).getLaser()){
+	 	if(storage.getArm(i).getLaser()){
 		    laser.label("***LASER EQUIPPED***");
 		}
 		else{

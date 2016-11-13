@@ -56,6 +56,8 @@ class workshop : public Fl_Window{
 
     //callback combo for the logout button
     inline void view_arm_view_i(){
+	hide_all_i();
+	arm_view.reset_values();
 	arm_view.show();
     }
     static void view_arm_view(Fl_Widget*w, void*data){
