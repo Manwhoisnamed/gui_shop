@@ -138,7 +138,7 @@ class gui_leg : public Fl_Window{
 	weight(150,95,100,25, "Weight (KG)"),
 	activeDraw(150,125,100,25, "Active Draw (KW)"),
 	passiveDraw(150,155,100,25, "Passive Draw (KW)"),
-	speed(150,185,100,25,"Speed"),
+	speed(150,185,100,25,"Speed (Km)"),
 	description(150,215,175,125,"Description"),
 	cancel(295, 355, 100, 25, "Cancel"),
 	create(190, 355, 100, 25, "Create"),

@@ -34,6 +34,10 @@ sadg
 max
 thsi is not a test
 -2end
+1 1 1 1 1 1
+ynb
+edfrgtyhjuk
+-2end
 -1
 HEADS=========================
 20 3 2 1 1
@@ -60,6 +64,10 @@ LEGS==========================
 59 30 58 2 40 67
 1
 a leg
+-2end
+654 3564 654 12 132 654
+leg
+a leg 2
 -2end
 -1
 BATTERIES=====================
