@@ -19,6 +19,7 @@
 #include "gui_torso.h"
 #include "view_arm.h"
 #include "view_leg.h"
+#include "view_head.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -32,6 +33,7 @@ class workshop : public Fl_Window{
     gui_torso torso_win;
     view_arm arm_view;
     view_leg leg_view;
+    view_head head_view;
     Fl_Menu_Item manage[21] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
@@ -44,7 +46,7 @@ class workshop : public Fl_Window{
 	{"&Storage",FL_ALT+'s', 0, 0, FL_SUBMENU},	
 	{"View &Arm",FL_ALT+'a', view_arm_view, this},
 	{"View &Battery",FL_ALT+'b', 0, 0},
-	{"View &Head",FL_ALT+'h', 0, 0},
+	{"View &Head",FL_ALT+'h', view_head_view, this},
 	{"View &Leg",FL_ALT+'l', view_leg_view, this},
 	{"View &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
 	{"View &RoboModel",FL_ALT+'r', 0, 0},
@@ -55,6 +57,16 @@ class workshop : public Fl_Window{
 	{0},
 	{0}
     };
+
+    //callback combo for the view head button
+    inline void view_head_view_i(){
+	hide_all_i();
+	head_view.reset_values();
+	head_view.show();
+    }
+    static void view_head_view(Fl_Widget*w, void*data){
+	((workshop*)data)->view_head_view_i();
+    }
 
     //callback combo for the view leg button
     inline void view_leg_view_i(){
@@ -80,6 +92,7 @@ class workshop : public Fl_Window{
     inline void hide_all_i(){
 	arm_view.hide();
 	leg_view.hide();
+	head_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((workshop*)data)->hide_all_i();
@@ -88,6 +101,7 @@ class workshop : public Fl_Window{
     //callback combo for the logout button
     inline void logout_clicked_i(){
 	this->hide();
+	hide_all_i();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){
@@ -144,8 +158,10 @@ class workshop : public Fl_Window{
 	    logout.callback(logout_clicked, this);
 	    this->add(arm_view);
 	    this->add(leg_view);
+	    this->add(head_view);
 	    arm_view.hide();
 	    leg_view.hide();
+	    head_view.hide();
         };
 };
 #endif

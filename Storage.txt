@@ -44,6 +44,20 @@ HEADS=========================
 head
 shoulders knees and toes
 -2end
+645 654 645 654 0
+this is a really long name and I am kind of hoping
+sdg
+gsd
+sgd
+asdg
+gsd
+gsda
+sg
+sadggds
+sdg
+asdg
+
+-2end
 -1
 TORSOS========================
 100 20 2 4 1
