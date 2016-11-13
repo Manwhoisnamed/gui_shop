@@ -6,6 +6,7 @@
 
 int main(void){
     storage.load();
+    database.loadData(storage);
     father father_win;
     father_win.show();
     (father_win.child(0))->show();

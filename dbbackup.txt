@@ -1,0 +1,23 @@
+Customers================
+nkfasd
+100
+afknsd
+fred
+670
+memes
+Maxwell Sanders
+1337
+Funkytown
+john
+102
+street man
+isaac
+2221
+2222
+-1
+Orders===================
+1337 123 300
+2221 123 56
+100 1234 6
+1337 1234 34
+-1
