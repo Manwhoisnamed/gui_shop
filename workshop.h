@@ -17,7 +17,7 @@
 #include "gui_head.h"
 #include "gui_battery.h"
 #include "gui_torso.h"
-#include "testGroup.h"
+#include "view_arm.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -29,8 +29,8 @@ class workshop : public Fl_Window{
     gui_head head_win;
     gui_battery battery_win;
     gui_torso torso_win;
-    testGroup test;
-    Fl_Menu_Item manage[17] = {
+    view_arm arm_view;
+    Fl_Menu_Item manage[21] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
 	{"Create &Battery",FL_ALT+'b', make_gui_battery, this},
@@ -40,30 +40,34 @@ class workshop : public Fl_Window{
 	{"Create &RoboModel",FL_ALT+'r', 0, 0},
 	{0},
 	{"&Storage",FL_ALT+'s', 0, 0, FL_SUBMENU},	
-	{"View &Arm",FL_ALT+'a', show_test, this},
-	{"View &Battery",FL_ALT+'b', hide_test, this},
+	{"View &Arm",FL_ALT+'a', view_arm_view, this},
+	{"View &Battery",FL_ALT+'b', 0, 0},
 	{"View &Head",FL_ALT+'h', 0, 0},
 	{"View &Leg",FL_ALT+'l', 0, 0},
 	{"View &Torso",FL_ALT+'t', 0, 0, FL_MENU_DIVIDER},
 	{"View &RoboModel",FL_ALT+'r', 0, 0},
 	{0},
+	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
+	{"Stop &Viewing",FL_ALT+'v', hide_all, this},
+	{"Change &Pin",FL_ALT+'p', 0, 0},	
+	{0},
 	{0}
     };
 
     //callback combo for the logout button
-    inline void show_test_i(){
-	test.show();
+    inline void view_arm_view_i(){
+	arm_view.show();
     }
-    static void show_test(Fl_Widget*w, void*data){
-	((workshop*)data)->show_test_i();
+    static void view_arm_view(Fl_Widget*w, void*data){
+	((workshop*)data)->view_arm_view_i();
     }
 
     //callback combo for the logout button
-    inline void hide_test_i(){
-	test.hide();
+    inline void hide_all_i(){
+	arm_view.hide();
     }
-    static void hide_test(Fl_Widget*w, void*data){
-	((workshop*)data)->hide_test_i();
+    static void hide_all(Fl_Widget*w, void*data){
+	((workshop*)data)->hide_all_i();
     }
 
     //callback combo for the logout button
@@ -123,8 +127,8 @@ class workshop : public Fl_Window{
 	menu(0,0,1000,20){
 	    menu.menu(manage);
 	    logout.callback(logout_clicked, this);
-	    this->add(test);
-	    test.hide();
+	    this->add(arm_view);
+	    arm_view.hide();
         };
 };
 #endif
