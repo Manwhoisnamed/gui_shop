@@ -56,6 +56,7 @@ class gui_arm : public Fl_Window{
 	}
 	else{
 	    sn_response.label("");
+	    isn = atoi(cost.value());
 	}
  	if(!isDouble(cost.value())){
 	    cost_response.labelcolor(FL_RED);

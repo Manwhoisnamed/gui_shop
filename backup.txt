@@ -3,14 +3,14 @@ ARMS==========================
 arm of awesome
 saduoh
 -2end
-145 15 21 6 45 0
+0 15 21 6 45 0
 woohoo
 this is 
 as
 crazy
 as socks
 -2end
-243 54 5195 45 62 1
+0 54 5195 45 62 1
 ahsd
 this is 
 a 
@@ -18,21 +18,13 @@ multi
 line 
 input
 -2end
-1337 44 44 44 44 0
+0 44 44 44 44 0
 dsuoafb
 sdof
 -2end
-909 45 159 12 58 0
+0 45 159 12 58 0
 max
 this is a test
--2end
-0 5 54 5 5 0
-sgoub
-sadg
--2end
-87 54 87 13 45 1
-max
-thsi is not a test
 -2end
 -1
 HEADS=========================
