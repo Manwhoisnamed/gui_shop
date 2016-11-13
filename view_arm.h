@@ -28,14 +28,39 @@ class view_arm : public Fl_Group{
 	Fl_Group(0,0,1000,700),
 	left(5,30,100,25,"Left"),
 	right(110, 30, 100, 25, "Right"),
-	name(250, 100, 100, 25, "Name"),
-	SN(250, 130, 100, 25, "SN"),
-	cost(250, 160, 100, 25, "Cost (USD)"),
-	weight(250, 190, 100, 25, "Weight (KG)"),
-	activeDraw(250, 220, 100, 25, "Passive Draw (KW)"),
-	passiveDraw(250, 250, 100, 25, "Weight (KW)"),
-	laser(250, 280, 125, 25, ""),	
-	description(250, 310, 250, 150, "Description"){
+	name(400, 100, 200, 25, "Name"),
+	SN(400, 130, 200, 25, "SN"),
+	cost(400, 160, 200, 25, "Cost (USD)"),
+	weight(400, 190, 200, 25, "Weight (KG)"),
+	activeDraw(400, 220, 200, 25, "Passive Draw (KW)"),
+	passiveDraw(400, 250, 200, 25, "Weight (KW)"),
+	laser(400, 280, 200, 25, ""),	
+	description(400, 310, 250, 150, "Description"){
+	    reset_values();
+	    laser.labelcolor(FL_RED);
+	}
+
+	void reset_values(){
+	    if(storage.armSize() != 0){
+	 	name.value((storage.getArm(0)).getName().c_str());
+	 	description.value((storage.getArm(0)).getDescription().c_str());
+	 	if(storage.getArm(0).getLaser()){
+		    laser.label("***LASER EQUIPPED***");
+		}
+		else{
+		    laser.label("");
+		}
+	    }
+	    else{
+	 	name.value("");
+	 	SN.value("");
+	 	cost.value("");
+	 	weight.value("");
+	 	passiveDraw.value("");
+	 	activeDraw.value("");
+	 	laser.label("");
+		description.value("There are no arms in storage.");
+	    }
 	}
 };
 #endif

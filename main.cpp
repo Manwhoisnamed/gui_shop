@@ -5,10 +5,8 @@
 #include "father.h"
 
 int main(void){
+    storage.load();
     father father_win;
-    storage.load();
-    storage.load();
-    storage.store();
     father_win.show();
     (father_win.child(0))->show();
     Fl::run();
