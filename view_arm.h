@@ -32,18 +32,34 @@ class view_arm : public Fl_Group{
 	SN(400, 130, 200, 25, "SN"),
 	cost(400, 160, 200, 25, "Cost (USD)"),
 	weight(400, 190, 200, 25, "Weight (KG)"),
-	activeDraw(400, 220, 200, 25, "Passive Draw (KW)"),
-	passiveDraw(400, 250, 200, 25, "Weight (KW)"),
+	activeDraw(400, 220, 200, 25, "Active Draw (KW)"),
+	passiveDraw(400, 250, 200, 25, "Passive Draw (KW)"),
 	laser(400, 280, 200, 25, ""),	
 	description(400, 310, 250, 150, "Description"){
 	    reset_values();
 	    laser.labelcolor(FL_RED);
+	    left.deactivate();
 	}
 
 	void reset_values(){
+	    string sSN;
+	    string scost;
+	    string sweight;
+	    string spassiveDraw;
+	    string sactiveDraw;
 	    if(storage.armSize() != 0){
 	 	name.value((storage.getArm(0)).getName().c_str());
 	 	description.value((storage.getArm(0)).getDescription().c_str());
+		sSN = to_string(storage.getArm(0).getSN());
+		scost = to_string(storage.getArm(0).getCost());
+		sweight = to_string(storage.getArm(0).getWeight());
+		spassiveDraw = to_string(storage.getArm(0).getpassiveDraw());
+		sactiveDraw = to_string(storage.getArm(0).getactiveDraw());
+		SN.value(sSN.c_str());
+		cost.value(scost.c_str());
+		weight.value(sweight.c_str());
+		passiveDraw.value(spassiveDraw.c_str());
+		activeDraw.value(sactiveDraw.c_str());
 	 	if(storage.getArm(0).getLaser()){
 		    laser.label("***LASER EQUIPPED***");
 		}
