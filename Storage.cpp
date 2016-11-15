@@ -145,46 +145,6 @@ void Storage::store(){
     	myfile << "-2end\n";
     }
     myfile << "-1\n";
-
-    //stores the robomodels
-    myfile << "ROBOMODELS====================\n";
-    for(i = 0; i < Storage::robomodels.size(); i ++){	
-	myfile << "torso-----------\n";
-	myfile << robomodels.at(i).getTorso().getSN() << " " << robomodels.at(i).getTorso().getWeight() << " " << robomodels.at(i).getTorso().getBSpace() << " " << robomodels.at(i).getTorso().getDraw() << " " << robomodels.at(i).getTorso().getCost() << "\n"; 
-        myfile << robomodels.at(i).getTorso().getName() << "\n";
-        myfile << robomodels.at(i).getTorso().getDescription() << "\n";
-	
-	myfile << "leg-------------\n";
-	myfile << robomodels.at(i).getLeg().getSN() << " " << robomodels.at(i).getLeg().getWeight() << " " << robomodels.at(i).getLeg().getSpeed() << " " << robomodels.at(i).getLeg().getpassiveDraw() << " " << robomodels.at(i).getLeg().getactiveDraw() << " " << robomodels.at(i).getLeg().getCost() << "\n"; 
-        myfile << robomodels.at(i).getLeg().getName() << "\n";
-        myfile << robomodels.at(i).getLeg().getDescription() << "\n";
-	
-	myfile << "head------------\n";
-	myfile << robomodels.at(i).getHead().getSN() << " " << robomodels.at(i).getHead().getWeight() << " " << robomodels.at(i).getHead().getLaser() << " " << robomodels.at(i).getHead().getDraw() << " " << robomodels.at(i).getHead().getCost() << "\n"; 
-        myfile << robomodels.at(i).getHead().getName() << "\n";
-        myfile << robomodels.at(i).getHead().getDescription() << "\n";
-	
-        myfile << "arms------------\n";
- 	for(j = 0 ; j < Storage::robomodels.at(i).getArmCount() ; j ++){
-	    myfile << robomodels.at(i).getArm(j).getSN() << " " << robomodels.at(i).getArm(j).getWeight() << " " << robomodels.at(i).getArm(j).getLaser() << " " << robomodels.at(i).getArm(j).getpassiveDraw() << " " << robomodels.at(i).getArm(j).getactiveDraw() << " " << robomodels.at(i).getArm(j).getCost() << "\n"; 
-            myfile << robomodels.at(i).getArm(j).getName() << "\n";
-            myfile << robomodels.at(i).getArm(j).getDescription() << "\n";
-	}		
-	myfile << "-2\n";
-
-	myfile << "batteries-------\n";
- 	for(j = 0 ; j < Storage::robomodels.at(i).getBatteryCount() ; j ++){
-	    myfile << robomodels.at(i).getBattery(j).getSN() << " " << robomodels.at(i).getBattery(j).getWeight() << " " << robomodels.at(i).getBattery(j).getCharge() << " " << robomodels.at(i).getBattery(j).getCost() << "\n"; 
-            myfile << robomodels.at(i).getBattery(j).getName() << "\n";
-            myfile << robomodels.at(i).getBattery(j).getDescription() << "\n";
-	}		
-	myfile << "-2\n";
-
-	myfile << robomodels.at(i).getPrice() << " " << robomodels.at(i).getMN() << "\n";
-        myfile << robomodels.at(i).getName() << "\n";
-        myfile << robomodels.at(i).getDescription() << "\n";
-    }
-    myfile << "-1\n";
     myfile.close();
 }
 
@@ -201,7 +161,6 @@ void Storage::load(){
    batteries.clear();
    heads.clear();
    torsos.clear();
-   robomodels.clear();
 
    //gets the arms
    getline(myfile,line);
@@ -313,88 +272,6 @@ void Storage::load(){
 	Storage::batteries.push_back(battery);
    }
 
-   //gets the robomodels
-   getline(myfile, line);
-   while(true){
-	RoboModel robomodel;
-
-	//gets the first line and checks if it is bad
-	getline(myfile, line);
-	if(line == "-1"){
-	    break;
-	}
-
-	//gets and make the torso also checks for end since it is first
-	getline(myfile, line);
-	istringstream torsovar(line);
-	torsovar >> SN >> weight >> batteryspace >> draw >> cost;
-	getline(myfile, name);
-	getline(myfile, description);
-	Torso torso(name, SN, weight, cost, description, draw, batteryspace);
-	robomodel.setTorso(torso);	
-
-	//gets and makes the leg
-	getline(myfile, line);
-	getline(myfile, line);
-	istringstream legvar(line);
-	legvar >> SN >> weight >> speed >> passiveDraw >> activeDraw >> cost;
-	getline(myfile,name);
-	getline(myfile,description);
-	Leg leg(name, SN, weight, cost, description, passiveDraw, activeDraw, speed);
-	robomodel.setLeg(leg);
-
-	//gets and makes the head 
-	getline(myfile, line);
-	getline(myfile, line);
-	istringstream headvar(line);
-	headvar >> SN >> weight >> laser, draw, cost;
-	getline(myfile,name);
-	getline(myfile,description);
-	Head head(name, SN, weight, cost, description, draw, laser);
-	robomodel.setHead(head);
- 		
- 	//gets the arms
-	getline(myfile,line);
-	while(true){
-	    getline(myfile,line);
-	    if(line == "-2"){
-		break;
-	    }
-	    istringstream armvar(line);
-	    armvar >> SN >> weight >> laser >> passiveDraw >> activeDraw >> cost;
-	    getline(myfile, name);
-	    getline(myfile, description);
-	    Arm arm(name, SN, weight, cost, description, passiveDraw, activeDraw, laser);
-	    robomodel.addArm(arm);
-	}
-
- 	//gets the arms
-	getline(myfile,line);
-	while(true){
-	    getline(myfile,line);
-	    if(line == "-2"){
-		break;
-	    }
-	    istringstream batvar(line);
-	    batvar >> SN >> weight >> charge  >> cost;
-	    getline(myfile, name);
-	    getline(myfile, description);
-	    Battery battery(name, SN, weight, cost, description, charge);
-	    robomodel.addBattery(battery);
-	}
-
-	//gets the price
-	getline(myfile, line);
-	istringstream iss(line);
-	iss >> price >> MN;
-	robomodel.setPrice(price);
-	robomodel.setMN(MN);
-	getline(myfile, name);
-	robomodel.setName(name);
-	getline(myfile, description);
-	robomodel.setDescription(description);
-	Storage::addRoboModel(robomodel);	
-   }
    myfile.close();
 }
 

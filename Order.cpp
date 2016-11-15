@@ -21,11 +21,6 @@ int Order::getQuantity(){
 }
 
 void Order::calculatePrice(Storage storage){
-    RoboModel robomodel;
-    robomodel = storage.getRoboModelMN(Order::ModelNumber);
-    Order::price = robomodel.getPrice() * quantity;    //multiply robot models by the quantity
-    Order::price += robomodel.getWeight() * .01; //.01 cent shipping by the kilogram
-    Order::price += Order::price * .0825;              //8.25 cents on a dollar for tax
 }
 
 void Order::setModelNumber(int MN){

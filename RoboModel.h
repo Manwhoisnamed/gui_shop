@@ -16,21 +16,21 @@
   public:
     RoboModel(){};    
 
-    void setHead(Head head);
-    void setLeg(Leg leg);
-    void setTorso(Torso torso);
-    void addBattery(Battery battery);
-    void addArm(Arm arm);
+    void setHead(int head);
+    void setLeg(int leg);
+    void setTorso(int torso);
+    void addBattery(int battery);
+    void addArm(int arm);
     void setName(string iname);
     void setDescription(string idescription);
     void setPrice(double iprice);
     void setMN(int iMN);
 
-    Arm getArm(int i);
-    Leg getLeg();
-    Torso getTorso();
-    Battery getBattery(int i);
-    Head getHead();
+    int getArm(int i);
+    int getLeg();
+    int getTorso();
+    int getBattery(int i);
+    int getHead();
     string getName();
     int getMN();
     double getCost();
@@ -44,11 +44,11 @@
 
   private:
     int batterySpace;
-    Head head;
-    Leg leg;
-    Torso torso;
-    vector<Arm> arms;
-    vector<Battery> batteries;
+    int head;
+    int leg;
+    int torso;
+    vector<int> arms;
+    vector<int> batteries;
     string description = "";
     string name = "";
     double price;

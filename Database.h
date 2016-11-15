@@ -19,7 +19,6 @@ class Database{
 	Database(){};
 	
 	//customer based things
-	void printCustomers();
 	Customer loadCustomer(int pin);
 	void addCustomer(Customer customer);
 	bool checkPin(int pin);
@@ -27,8 +26,6 @@ class Database{
 	int getCustomerSize();
 
         //order based things
-	void printOrders(Storage storage);
-	void printMyOrders(int pin, Storage storage);
 	void addOrder(Order order);
 	
 	//persistence stuff
