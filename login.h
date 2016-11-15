@@ -18,28 +18,39 @@ class login : public Fl_Window{
     Fl_Input pin_field;
     Fl_Choice clearance;
     Fl_Box response;    
-    Fl_Menu_Item choices[5] = {
+    Fl_Menu_Item choices[6] = {
 	{"Project Manager"},
 	{"Beloved Customer"},
 	{"Sales Associate"},
 	{"Bossy Bossman"},
+	{"System Admin"},
 	{0}
     };	
     inline void progress_i(){
-	if(strcmp(choices[clearance.value()].label(), "Project Manager") == 0 && strcmp(pin_field.value(), "1337") == 0){
+	if(clearance.value() == 0 && strcmp(pin_field.value(), "1337") == 0){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(1))->show();
 	}
-	else if(strcmp(choices[clearance.value()].label(), "Beloved Customer") == 0 && database.checkPin(atoi(pin_field.value()))){
+	else if(clearance.value() == 1 && database.checkPin(atoi(pin_field.value()))){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(3))->show();
 	}
-	else if(strcmp(choices[clearance.value()].label(), "Sales Associate") == 0 && strcmp(pin_field.value(), "1337") == 0){
+	else if(clearance.value() == 2 && strcmp(pin_field.value(), "1337") == 0){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(2))->show();
+	}
+	else if(clearance.value() == 3 && strcmp(pin_field.value(), "1337") == 0){
+       	    this->hide();
+	    response.label("");
+	    ((this->parent())->child(4))->show();
+	}
+	else if(clearance.value() == 4 && strcmp(pin_field.value(), "1337") == 0){
+       	    this->hide();
+	    response.label("");
+	    ((this->parent())->child(5))->show();
 	}
 	else{
 	    response.labelcolor(FL_RED);

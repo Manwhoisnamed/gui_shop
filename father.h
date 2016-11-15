@@ -5,6 +5,8 @@
 #include "pos.h"
 #include "salesfloor.h"
 #include "workshop.h"
+#include "boss.h"
+#include "sysadmin.h"
 
 #ifndef __father_H
 #define __father_H 2016
@@ -13,6 +15,8 @@ class father : public Fl_Window{
     pos sales_win;
     workshop pm_win;
     salesfloor customer_win;
+    boss boss_win;
+    sysadmin admin_win;
     public:
         father() 
         : Fl_Window(1000,700, "Rob Robman's Rockin Roboshop System"){
@@ -20,6 +24,8 @@ class father : public Fl_Window{
 	    this->add(pm_win);
 	    this->add(sales_win);
 	    this->add(customer_win);
+	    this->add(boss_win);
+	    this->add(admin_win);
 	    end();
         }
 };
