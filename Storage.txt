@@ -38,6 +38,10 @@ thsi is not a test
 ynb
 edfrgtyhjuk
 -2end
+354 0.231 354 5 12.03 0
+arm 57
+this is not heinz
+-2end
 -1
 HEADS=========================
 20 3 2 1 1
@@ -102,6 +106,10 @@ this part is the best budget battery we have
 654 21 654 325
 ihihih
 this is a good meme
+-2end
+2 65 2.5 12
+new bat
+fdjsygk
 -2end
 -1
 ROBOMODELS====================

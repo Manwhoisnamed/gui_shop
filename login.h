@@ -31,7 +31,7 @@ class login : public Fl_Window{
 	    response.label("");
 	    ((this->parent())->child(1))->show();
 	}
-	else if(strcmp(choices[clearance.value()].label(), "Beloved Customer") == 0 && !database.checkPin(atoi(pin_field.value()))){
+	else if(strcmp(choices[clearance.value()].label(), "Beloved Customer") == 0 && database.checkPin(atoi(pin_field.value()))){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(3))->show();

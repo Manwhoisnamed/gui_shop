@@ -17,6 +17,7 @@
 #include "gui_head.h"
 #include "gui_battery.h"
 #include "gui_torso.h"
+#include "gui_model.h"
 #include "view_arm.h"
 #include "view_leg.h"
 #include "view_head.h"
@@ -33,6 +34,7 @@ class workshop : public Fl_Window{
     gui_head head_win;
     gui_battery battery_win;
     gui_torso torso_win;
+    gui_model model_win;
     view_arm arm_view;
     view_leg leg_view;
     view_head head_view;
@@ -45,7 +47,7 @@ class workshop : public Fl_Window{
 	{"Create &Head",FL_ALT+'h', make_gui_head, this},
 	{"Create &Leg",FL_ALT+'l', make_gui_leg, this},
 	{"Create &Torso",FL_ALT+'t', make_gui_torso, this, FL_MENU_DIVIDER},
-	{"Create &RoboModel",FL_ALT+'r', 0, 0},
+	{"Create &RoboModel",FL_ALT+'r', make_gui_model, this},
 	{0},
 	{"&Storage",FL_ALT+'s', 0, 0, FL_SUBMENU},	
 	{"View &Arm",FL_ALT+'a', view_arm_view, this},
@@ -132,6 +134,14 @@ class workshop : public Fl_Window{
     }
     static void logout_clicked(Fl_Widget*w, void*data){
 	((workshop*)data)->logout_clicked_i();
+    }
+
+    //callback combo to make a gui leg window
+    inline void make_gui_model_i(){
+	model_win.show();
+    }
+    static void make_gui_model(Fl_Widget*w, void*data){
+	((workshop*)data)->make_gui_model_i();
     }
 
     //callback combo to make a gui leg window
