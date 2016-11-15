@@ -24,6 +24,7 @@ class view_arm : public Fl_Group{
 	Fl_Output weight;
 	Fl_Box laser;
 	Fl_Box part;
+	Fl_Choice SN_choice;
 	int i = 0;
 
 	inline void down_clicked_i(){
@@ -109,9 +110,9 @@ class view_arm : public Fl_Group{
     public:
 	view_arm():
 	Fl_Group(0,0,1000,700),
-	refresh(5, 60, 100, 25, "Refresh"),
-	up(5,30,100,25,"@8>"),
-	down(110, 30, 100, 25, "@2>"),
+	refresh(105, 140, 125, 25, "Refresh"),
+	up(105,170,125,25,"@8>"),
+	down(105, 230, 125, 25, "@2>"),
 	name(400, 100, 200, 25, "Name"),
 	SN(400, 130, 200, 25, "SN"),
 	cost(400, 160, 200, 25, "Cost (USD)"),
@@ -120,7 +121,8 @@ class view_arm : public Fl_Group{
 	passiveDraw(400, 250, 200, 25, "Passive Draw (KW)"),
 	laser(400, 280, 200, 25, ""),	
 	description(400, 310, 250, 150, "Description"),
-	part(450, 30, 100, 25, "Viewing Arms"){
+	part(450, 30, 100, 25, "Viewing Arms"),
+	SN_choice(105, 200, 125, 25, "SN Selector"){
 	    reset_values();
 	    laser.labelcolor(FL_RED);
 	    up.deactivate();
