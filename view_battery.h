@@ -13,8 +13,8 @@
 #define __view_battery_H 2016
 class view_battery : public Fl_Group{
 	Fl_Button refresh;
-	Fl_Button left;
-	Fl_Button right;
+	Fl_Button up;
+	Fl_Button down;
 	Fl_Multiline_Output description;
 	Fl_Output name;
 	Fl_Output SN;
@@ -24,12 +24,12 @@ class view_battery : public Fl_Group{
 	Fl_Box part;
 	int i = 0;
 
-	inline void right_clicked_i(){
+	inline void down_clicked_i(){
 	    i++;
 	    if(i == storage.batterySize() - 1){
-		right.deactivate();
+		down.deactivate();
 	    }
-	    left.activate();
+	    up.activate();
 	    string sSN;
 	    string scost;
 	    string sweight;
@@ -46,16 +46,16 @@ class view_battery : public Fl_Group{
 	    weight.value(sweight.c_str());
 	    charge.value(scharge.c_str());
 	};
-	static void right_clicked(Fl_Widget* w, void* data){
-	    ((view_battery*)data)->right_clicked_i();
+	static void down_clicked(Fl_Widget* w, void* data){
+	    ((view_battery*)data)->down_clicked_i();
 	};
 
-	inline void left_clicked_i(){
+	inline void up_clicked_i(){
 	    i--;
 	    if(i == 0){
-		left.deactivate();
+		up.deactivate();
 	    }
-	    right.activate();
+	    down.activate();
 	    string sSN;
 	    string scost;
 	    string sweight;
@@ -72,14 +72,14 @@ class view_battery : public Fl_Group{
 	    weight.value(sweight.c_str());
 	    charge.value(scharge.c_str());
 	};
-	static void left_clicked(Fl_Widget* w, void* data){
-	    ((view_battery*)data)->left_clicked_i();
+	static void up_clicked(Fl_Widget* w, void* data){
+	    ((view_battery*)data)->up_clicked_i();
 	};
 
-	//for the refresh button, if someone builds a part and the right is deactivate then this will fix it
+	//for the refresh button, if someone builds a part and the down is deactivate then this will fix it
         inline void refresh_clicked_i(){
 	    if(storage.batterySize() > i + 1){
-		right.activate();
+		down.activate();
 	    }
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
@@ -90,8 +90,8 @@ class view_battery : public Fl_Group{
 	view_battery():
 	Fl_Group(0,0,1000,700),
 	refresh(5, 60, 100, 25, "Refresh"),
-	left(5,30,100,25,"Left"),
-	right(110, 30, 100, 25, "Right"),
+	up(5,30,100,25,"@8>"),
+	down(110, 30, 100, 25, "@2>"),
 	name(400, 100, 200, 25, "Name"),
 	SN(400, 130, 200, 25, "SN"),
 	cost(400, 160, 200, 25, "Cost (USD)"),
@@ -100,20 +100,20 @@ class view_battery : public Fl_Group{
 	description(400, 250, 250, 150, "Description"),
 	part(450, 30, 100, 25, "Viewing Batteries"){
 	    reset_values();
-	    left.deactivate();
-	    left.callback(left_clicked,this);
-	    right.callback(right_clicked,this);
+	    up.deactivate();
+	    up.callback(up_clicked,this);
+	    down.callback(down_clicked,this);
 	    if(storage.batterySize() == 1){
-	        right.deactivate();
+	        down.deactivate();
 	    }
 	    refresh.callback(refresh_clicked, this);
 	}
 
 	void reset_values(){
 	    i = 0;
-	    left.deactivate();
+	    up.deactivate();
 	    if(storage.batterySize() == 1){
-	        right.deactivate();
+	        down.deactivate();
 	    }
 	    string sSN;
 	    string scost;
