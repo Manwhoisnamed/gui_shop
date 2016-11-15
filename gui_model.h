@@ -7,6 +7,7 @@
 #include <Fl/Fl_Input.H>
 #include <Fl/Fl_Box.H>
 #include <Fl/Fl_Button.H>
+#include <Fl/Fl_Multiline_Input.H>
 
 #ifndef __gui_model_H
 #define __gui_model_H 2016
@@ -41,10 +42,19 @@ class gui_model: public Fl_Window{
     Fl_Box div1;
     Fl_Box div2;
     Fl_Box div3;
+    Fl_Box arm1_laser;
+    Fl_Box arm2_laser;
+    Fl_Box head_laser;
+    Fl_Input name;
+    Fl_Box name_error;
+    Fl_Input MN;
+    Fl_Box MN_error;
+    //Fl_Multiline_Input description;
+
 
     public:
 	gui_model():
-	Fl_Window(1000, 500),
+	Fl_Window(1000, 315),
 	refresh(5,5,100,25,"Refresh"),
 	torso_name(110,35,125,25, "Torso"),
 	head_name(110,65,125,25, "Head"),
@@ -64,25 +74,30 @@ class gui_model: public Fl_Window{
 	bat3_pin(240,245,125,25, ""),
 	name_header(110,5,125,25, "Name"),
 	pin_header(240,5,125,25, "Pin"),
-	stats_header(455,5,125,25, "Stats"),
+	stats_header(480,5,100,25, "Stats"),
 	div1(370, 5, 5, 270, ""),
 	div2(580, 5, 5, 270, ""),
 	div3(5, 275, 580, 5, ""),
 	bspace(480, 35, 100,25, "Battery Space"),
 	speed(480,65,100,25,"Speed (Km)"),
-	
-
-
+	head_laser(480,95,100,25,"test"),
+	arm1_laser(480,125,100,25,"test"),
+	arm2_laser(480,155,100,25,"test"),
 	life(480,185,100,25,"Life (Hr)"),
 	cost(480,215,100,25,"Cost (USD)"),
-	weight(480,245,100,25,"Weight (Kg)"){
+	weight(480,245,100,25,"Weight (Kg)"),
+	name(110, 285, 100, 25, "Name"),
+	name_error(215, 285, 100, 25, "Needs Name"),
+	MN(425, 285, 100, 25, "Model Number"),
+	MN_error(530, 285, 100,25, "Need Integer"){
 	    div1.box(FL_UP_BOX);
 	    div1.color(FL_BLACK);
 	    div2.box(FL_UP_BOX);
 	    div2.color(FL_BLACK);
 	    div3.box(FL_UP_BOX);
 	    div3.color(FL_BLACK);
-
+	    name_error.labelcolor(FL_RED);
+	    MN_error.labelcolor(FL_RED);
 	}
 		
 };
