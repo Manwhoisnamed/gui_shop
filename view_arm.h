@@ -7,6 +7,7 @@
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Output.H>
 #include <Fl/Fl_Multiline_Output.H>
+#include <Fl/Fl_Menu_Item.H>
 #include "globals.h"
 
 #ifndef __view_arm_H
@@ -25,14 +26,38 @@ class view_arm : public Fl_Group{
 	Fl_Box laser;
 	Fl_Box part;
 	Fl_Choice SN_choice;
+	Fl_Menu_Item choices[10000] = {{0}};
+	int size = 0;
 	int i = 0;
 
-	inline void down_clicked_i(){
-	    i++;
-	    if(i == storage.armSize() - 1){
-		down.deactivate();
+	void initialize_choices(){
+	    size = storage.armSize();
+	    for(int x = 0; x < size; x ++){
+		SN_choice.add(to_string(storage.getArm(x).getSN()).c_str());
 	    }
-	    up.activate();
+	}
+
+	inline void select_i(){
+	    i = SN_choice.value();
+	    if(i == 0){
+		up.deactivate();
+	    }
+	    else{
+		up.activate();
+	    }
+	    if(i == size){
+		down.deactivate();
+	    }	
+	    else{
+		down.activate();
+	    }
+	    popfields();
+	}
+	static void select(Fl_Widget* w, void * data){
+	    ((view_arm*)data)->select_i();
+	}
+
+	void popfields(){
 	    string sSN;
 	    string scost;
 	    string sweight;
@@ -57,6 +82,16 @@ class view_arm : public Fl_Group{
 	    else{
 	        laser.label("");
 	    }
+	}
+
+	inline void down_clicked_i(){
+	    i++;
+	    SN_choice.value(i);
+	    if(i == storage.armSize() - 1){
+		down.deactivate();
+	    }
+	    up.activate();
+	    popfields();
 	};
 	static void down_clicked(Fl_Widget* w, void* data){
 	    ((view_arm*)data)->down_clicked_i();
@@ -64,34 +99,12 @@ class view_arm : public Fl_Group{
 
 	inline void up_clicked_i(){
 	    i--;
+	    SN_choice.value(i);
 	    if(i == 0){
 		up.deactivate();
 	    }
 	    down.activate();
-	    string sSN;
-	    string scost;
-	    string sweight;
-	    string spassiveDraw;
-	    string sactiveDraw;
-	    
-	    name.value((storage.getArm(i)).getName().c_str());
-	    description.value((storage.getArm(i)).getDescription().c_str());
-	    sSN = to_string(storage.getArm(i).getSN());
-	    scost = to_string(storage.getArm(i).getCost());
-	    sweight = to_string(storage.getArm(i).getWeight());
-	    spassiveDraw = to_string(storage.getArm(i).getpassiveDraw());
-	    sactiveDraw = to_string(storage.getArm(i).getactiveDraw());
-	    SN.value(sSN.c_str());
-	    cost.value(scost.c_str());
-	    weight.value(sweight.c_str());
-	    passiveDraw.value(spassiveDraw.c_str());
-	    activeDraw.value(sactiveDraw.c_str());
-	    if(storage.getArm(i).getLaser()){
-	        laser.label("***LASER EQUIPPED***");
-	    }
-	    else{
-	        laser.label("");
-	    }
+	    popfields();
 	};
 	static void up_clicked(Fl_Widget* w, void* data){
 	    ((view_arm*)data)->up_clicked_i();
@@ -101,6 +114,11 @@ class view_arm : public Fl_Group{
         inline void refresh_clicked_i(){
 	    if(storage.armSize() > i + 1){
 		down.activate();
+	    }
+	    if(size < storage.armSize()){
+		for(int x = size; x < storage.armSize(); x++){
+		    SN_choice.add(to_string(storage.getArm(x).getSN()).c_str());
+		}
 	    }
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
@@ -132,35 +150,16 @@ class view_arm : public Fl_Group{
 	        down.deactivate();
 	    }
 	    refresh.callback(refresh_clicked, this);
+	    initialize_choices();
+	    SN_choice.callback(select, this);
 	}
 
 	void reset_values(){
-	    i = 0;
+	    i=0;
+	    SN_choice.value(0);
 	    up.deactivate();
-	    string sSN;
-	    string scost;
-	    string sweight;
-	    string spassiveDraw;
-	    string sactiveDraw;
 	    if(storage.armSize() > 0){
-	 	name.value((storage.getArm(i)).getName().c_str());
-	 	description.value((storage.getArm(i)).getDescription().c_str());
-		sSN = to_string(storage.getArm(i).getSN());
-		scost = to_string(storage.getArm(i).getCost());
-		sweight = to_string(storage.getArm(i).getWeight());
-		spassiveDraw = to_string(storage.getArm(i).getpassiveDraw());
-		sactiveDraw = to_string(storage.getArm(i).getactiveDraw());
-		SN.value(sSN.c_str());
-		cost.value(scost.c_str());
-		weight.value(sweight.c_str());
-		passiveDraw.value(spassiveDraw.c_str());
-		activeDraw.value(sactiveDraw.c_str());
-	 	if(storage.getArm(i).getLaser()){
-		    laser.label("***LASER EQUIPPED***");
-		}
-		else{
-		    laser.label("");
-		}
+		popfields();
 	    }
 	    else{
 		down.deactivate();

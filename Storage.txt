@@ -42,6 +42,10 @@ edfrgtyhjuk
 arm 57
 this is not heinz
 -2end
+654 321 654 14 54 0
+jka
+fart man
+-2end
 -1
 HEADS=========================
 20 3 2 1 1
@@ -111,5 +115,4 @@ this is a good meme
 new bat
 fdjsygk
 -2end
--1
 -1
