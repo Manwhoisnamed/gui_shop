@@ -10,7 +10,9 @@
     double charge;    
   public:
     Battery(){};
-    Battery(string iname, int iSN, double iweight, double icost, string idescription, double icharge) : RoboPart(iname, iSN, iweight, icost, idescription) , charge(icharge) {}
+    Battery(string iname, int iSN, double iweight, double icost, string idescription, double icharge): 
+    RoboPart(iname, iSN, iweight, icost, idescription),
+    charge(icharge){}
     double getCharge();
  };
  #endif

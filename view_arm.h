@@ -26,7 +26,7 @@ class view_arm : public Fl_Group{
 	Fl_Box laser;
 	Fl_Box part;
 	Fl_Choice SN_choice;
-	Fl_Menu_Item choices[10000] = {{0}};
+	Fl_Menu_Item choices[10000];
 	int size = 0;
 	int i = 0;
 
@@ -128,9 +128,9 @@ class view_arm : public Fl_Group{
     public:
 	view_arm():
 	Fl_Group(0,0,1000,700),
-	refresh(105, 140, 125, 25, "Refresh"),
-	up(105,170,125,25,"@8>"),
-	down(105, 230, 125, 25, "@2>"),
+	refresh(105, 40, 125, 25, "Refresh"),
+	up(105,70,125,25,"@8>"),
+	down(105, 130, 125, 25, "@2>"),
 	name(400, 100, 200, 25, "Name"),
 	SN(400, 130, 200, 25, "SN"),
 	cost(400, 160, 200, 25, "Cost (USD)"),
@@ -140,7 +140,7 @@ class view_arm : public Fl_Group{
 	laser(400, 280, 200, 25, ""),	
 	description(400, 310, 250, 150, "Description"),
 	part(450, 30, 100, 25, "Viewing Arms"),
-	SN_choice(105, 200, 125, 25, "SN Selector"){
+	SN_choice(105, 100, 125, 25, "Part Selector"){
 	    reset_values();
 	    laser.labelcolor(FL_RED);
 	    up.deactivate();

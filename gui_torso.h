@@ -96,7 +96,7 @@ class gui_torso : public Fl_Window{
 	    valid = false;
 	}
 	if(valid){
-	    Torso torso(name.value(), isn, iweight, icost, description.value(), idraw, ibspace);
+	    Torso torso(name.value(), isn, iweight, icost, description.value(), idraw, ibspace, "placeholder");
 	    storage.addTorso(torso);	    
 	    storage.store();
 	    this->hide();

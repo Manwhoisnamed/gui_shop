@@ -12,3 +12,7 @@
 	return Torso::batterySpace;
  }
 
+ string Torso::getPicture(){
+	return Torso::picture;
+ }
+

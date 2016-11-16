@@ -92,7 +92,7 @@ class gui_head : public Fl_Window{
 	    ilaser = true;
 	}
 	if(valid){
-	    Head head(name.value(), isn, iweight, icost, description.value(), idraw, ilaser);
+	    Head head(name.value(), isn, iweight, icost, description.value(), idraw, ilaser, "placeholder");
 	    storage.addHead(head);	    
 	    storage.store();
 	    this->hide();

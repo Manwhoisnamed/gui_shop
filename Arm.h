@@ -11,15 +11,18 @@
     double passiveDraw;
     double activeDraw;
     bool laser;    
+    string picture;
   public:
     Arm(){};
-    Arm(string iname, int iSN, double iweight, double icost, string idescription, double ipassiveDraw, double iactiveDraw, bool ilaser) : 
+    Arm(string iname, int iSN, double iweight, double icost, string idescription, double ipassiveDraw, double iactiveDraw, bool ilaser, string ipicture): 
   	RoboPart(iname, iSN, iweight, icost, idescription), 
 	passiveDraw(ipassiveDraw), 
 	activeDraw(iactiveDraw), 
-	laser(ilaser){}
+	laser(ilaser),
+	picture(ipicture){}
     double getpassiveDraw();
     double getactiveDraw();
     bool getLaser();
+    string getPicture();
  };
  #endif

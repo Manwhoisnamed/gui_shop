@@ -14,3 +14,8 @@
  bool Arm::getLaser(){
 	return Arm::laser;
  }
+
+ string Arm::getPicture(){
+	return Arm::picture;
+ }
+

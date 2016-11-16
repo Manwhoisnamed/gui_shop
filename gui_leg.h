@@ -109,7 +109,7 @@ class gui_leg : public Fl_Window{
 	    valid = false;
 	}
 	if(valid){
-	    Leg leg(name.value(), isn, iweight, icost, description.value(), pass, act, ispeed);
+	    Leg leg(name.value(), isn, iweight, icost, description.value(), pass, act, ispeed, "placeholder");
 	    storage.addLeg(leg);	    
 	    storage.store();
 	    this->hide();

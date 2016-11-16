@@ -11,10 +11,16 @@
   private:
     double draw;
     bool laser;    
+    string picture;
   public:
     Head(){};
-    Head(string iname, int iSN, double iweight, double icost, string idescription, double idraw, bool ilaser) : RoboPart(iname, iSN, iweight, icost, idescription) , draw(idraw), laser(ilaser){}
+    Head(string iname, int iSN, double iweight, double icost, string idescription, double idraw, bool ilaser, string ipicture): 
+    RoboPart(iname, iSN, iweight, icost, idescription), 
+    draw(idraw), 
+    laser(ilaser),
+    picture(ipicture){}
     double getDraw();
     bool getLaser();
+    string getPicture();
  };
  #endif

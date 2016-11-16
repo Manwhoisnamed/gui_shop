@@ -11,3 +11,8 @@
  bool Head::getLaser(){
 	return Head::laser;
  }
+
+ string Head::getPicture(){
+	return Head::picture;
+ }
+

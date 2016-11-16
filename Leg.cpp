@@ -15,3 +15,8 @@
  int Leg::getSpeed(){
 	return Leg::speed;
  }
+
+ string Leg::getPicture(){
+	return Leg::picture;
+ }
+
