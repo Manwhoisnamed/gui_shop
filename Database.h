@@ -15,8 +15,15 @@ class Database{
     private:
 	vector<Customer> customers;
 	vector<Order> orders;
+	int bossPin;
+	int PMPin;
+
     public:
 	Database(){};
+
+	//pin setters and getters
+	int getPMPin();
+	int getBossPin();
 	
 	//customer based things
 	Customer loadCustomer(int pin);

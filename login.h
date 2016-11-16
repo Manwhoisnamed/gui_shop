@@ -27,7 +27,7 @@ class login : public Fl_Window{
 	{0}
     };	
     inline void progress_i(){
-	if(clearance.value() == 0 && strcmp(pin_field.value(), "1337") == 0){
+	if(clearance.value() == 0 && database.getPMPin() == atoi(pin_field.value())){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(1))->show();
@@ -42,7 +42,7 @@ class login : public Fl_Window{
 	    response.label("");
 	    ((this->parent())->child(2))->show();
 	}
-	else if(clearance.value() == 3 && strcmp(pin_field.value(), "1337") == 0){
+	else if(clearance.value() == 3 && database.getBossPin() == atoi(pin_field.value())){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(4))->show();

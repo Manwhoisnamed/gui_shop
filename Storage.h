@@ -22,6 +22,7 @@
     vector<Battery> batteries;
     vector<Head> heads;
     vector<RoboModel> robomodels;    
+
   public:
     //the usage suite
     Storage(){};

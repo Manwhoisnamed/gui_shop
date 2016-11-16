@@ -12,6 +12,13 @@ int Database::getCustomerSize(){
     return customers.size();
 }
 
+int Database::getBossPin(){
+    return bossPin;
+}
+
+int Database::getPMPin(){
+    return PMPin;
+}
 
 Customer Database::loadCustomer(int i){
 	return Database::customers.at(i);
@@ -65,6 +72,11 @@ void Database::loadData(Storage storage){
     string line, name, address;
     int pin, MN, quantity;
   
+    //gets the boss and pm pin
+    getline(myfile, line);
+    istringstream pins(line);
+    pins >> bossPin >> PMPin;
+
     //gets the customers
     getline(myfile, line);
     while(true){
