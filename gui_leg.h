@@ -131,7 +131,7 @@ class gui_leg : public Fl_Window{
 
     public:
 	gui_leg() :
-	Fl_Window(400, 385, "RoboPart Leg Construction"),
+	Fl_Window(600, 415, "RoboPart Leg Construction"),
 	name(150,5,100,25, "Name"),
 	SN(150,35,100,25, "SN"),
 	cost(150,65,100,25, "Cost (USD)"),
@@ -140,8 +140,8 @@ class gui_leg : public Fl_Window{
 	passiveDraw(150,155,100,25, "Passive Draw (KW)"),
 	speed(150,185,100,25,"Speed (Km)"),
 	description(150,215,175,125,"Description"),
-	cancel(295, 355, 100, 25, "Cancel"),
-	create(190, 355, 100, 25, "Create"),
+	cancel(495, 385, 100, 25, "Cancel"),
+	create(390, 385, 100, 25, "Create"),
 	name_response(255, 5, 115, 25),
 	sn_response(255, 35,115,25),
 	cost_response(255, 65, 115, 25),

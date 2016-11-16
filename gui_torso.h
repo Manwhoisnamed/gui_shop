@@ -118,7 +118,7 @@ class gui_torso : public Fl_Window{
 
     public:
 	gui_torso() :
-	Fl_Window(400, 355, "RoboPart Torso Construction"),
+	Fl_Window(600, 385, "RoboPart Torso Construction"),
 	name(150,5,100,25, "Name"),
 	SN(150,35,100,25, "SN"),
 	cost(150,65,100,25, "Cost (USD)"),
@@ -126,8 +126,8 @@ class gui_torso : public Fl_Window{
 	draw(150,125,100,25, "Active Draw (KW)"),
 	bspace(150,155,100,25,"Battery Space"),
 	description(150,185,175,125,"Description"),
-	cancel(295, 325, 100, 25, "Cancel"),
-	create(190, 325, 100, 25, "Create"),
+	cancel(495, 355, 100, 25, "Cancel"),
+	create(390, 355, 100, 25, "Create"),
 	name_response(255, 5, 115, 25),
 	sn_response(255, 35,115,25),
 	cost_response(255, 65, 115, 25),
