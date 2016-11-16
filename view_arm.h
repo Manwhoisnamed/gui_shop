@@ -45,7 +45,7 @@ class view_arm : public Fl_Group{
 	    else{
 		up.activate();
 	    }
-	    if(i == size){
+	    if(i == size - 1){
 		down.deactivate();
 	    }	
 	    else{
