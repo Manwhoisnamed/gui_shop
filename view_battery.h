@@ -30,7 +30,7 @@ class view_battery : public Fl_Group{
 	void initialize_choices(){
 	    size = storage.batterySize();
 	    for(int x = 0; x < size; x ++){
-		SN_choice.add(to_string(storage.getBattery(x).getSN()).c_str());
+		SN_choice.add((storage.getBattery(x).getName() + " - " + to_string(storage.getBattery(x).getSN())).c_str());
 	    }
 	}
 
@@ -103,6 +103,11 @@ class view_battery : public Fl_Group{
 	    if(storage.batterySize() > i + 1){
 		down.activate();
 	    }
+	    if(size < storage.batterySize()){
+		for(int x = size; x < storage.batterySize(); x++){
+		    SN_choice.add((storage.getBattery(x).getName() + " - " + to_string(storage.getBattery(x).getSN())).c_str());
+		}
+	    }
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
 	    ((view_battery*)data)->refresh_clicked_i();
@@ -111,9 +116,9 @@ class view_battery : public Fl_Group{
     public:
 	view_battery():
 	Fl_Group(0,0,1000,700),
-	refresh(105, 40, 125, 25, "Refresh"),
-	up(105,70,125,25,"@8>"),
-	down(105, 130, 125, 25, "@2>"),
+	refresh(105, 40, 175, 25, "Refresh"),
+	up(105,70,175,25,"@8>"),
+	down(105, 130, 175, 25, "@2>"),
 	name(400, 100, 200, 25, "Name"),
 	SN(400, 130, 200, 25, "SN"),
 	cost(400, 160, 200, 25, "Cost (USD)"),
@@ -121,7 +126,7 @@ class view_battery : public Fl_Group{
 	charge(400, 220, 200, 25, "Active Draw (KW)"),
 	description(400, 250, 250, 150, "Description"),
 	part(450, 30, 100, 25, "Viewing Batteries"),
-	SN_choice(105, 100, 125, 25, "Part Selector"){
+	SN_choice(105, 100, 175, 25, "Part Selector"){
 	    reset_values();
 	    up.deactivate();
 	    up.callback(up_clicked,this);
