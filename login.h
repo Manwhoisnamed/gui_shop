@@ -4,7 +4,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Return_Button.H>
-#include <FL/Fl_Input.H>
+#include <FL/Fl_Int_Input.H>
 #include <FL/Fl_Output.H>
 #include <FL/Fl_Box.H>
 #include <Fl/Fl_Menu_Item.H>
@@ -15,7 +15,7 @@
 #define __login_H 2016
 class login : public Fl_Window{
     Fl_Return_Button login_button;
-    Fl_Input pin_field;
+    Fl_Int_Input pin_field;
     Fl_Choice clearance;
     Fl_Box response;    
     Fl_Menu_Item choices[6] = {
@@ -37,7 +37,7 @@ class login : public Fl_Window{
 	    response.label("");
 	    ((this->parent())->child(3))->show();
 	}
-	else if(clearance.value() == 2 && strcmp(pin_field.value(), "1337") == 0){
+	else if(clearance.value() == 2 && strcmp(pin_field.value(),"1337") == 0){
        	    this->hide();
 	    response.label("");
 	    ((this->parent())->child(2))->show();

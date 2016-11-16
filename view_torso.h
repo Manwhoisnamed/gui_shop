@@ -29,7 +29,7 @@ class view_torso : public Fl_Group{
 	int i = 0;
 
 	void initialize_choices(){
-	    size = storage.armSize();
+	    size = storage.torsoSize();
 	    for(int x = 0; x < size; x ++){
 		SN_choice.add((storage.getTorso(x).getName() + " - " + to_string(storage.getTorso(x).getSN())).c_str());
 	    }
@@ -140,7 +140,7 @@ class view_torso : public Fl_Group{
 	        down.deactivate();
 	    }
 	    refresh.callback(refresh_clicked, this);
-	    initialize_choices():
+	    initialize_choices();
 	    SN_choice.callback(select, this);
 	}
 
