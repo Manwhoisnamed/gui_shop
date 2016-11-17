@@ -71,6 +71,7 @@ class gui_PMPin : public Fl_Window{
 
     void reset_vals(){
 	oldpass.value("");
+	oldpass.activate();
 	newpass1.value("");
 	newpass2.value("");
 	old_error.label("");
@@ -78,7 +79,17 @@ class gui_PMPin : public Fl_Window{
 	new2_error.label("");
     }	
 
-	gui_PMPin():
+    void sys_res_vals(){
+	oldpass.value(to_string(database.getPMPin()).c_str());
+	oldpass.deactivate();
+	newpass1.value("");
+	newpass2.value("");
+	old_error.label("");
+	new1_error.label("");
+	new2_error.label("");
+    }	
+
+    gui_PMPin():
 	Fl_Window(350, 125, "PM Password Changer"),
 	oldpass(125, 5, 100, 25, "Old Pin"),
 	old_error(230, 5, 100, 25, ""),

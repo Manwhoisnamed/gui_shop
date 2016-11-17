@@ -12,24 +12,34 @@
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
+#include "gui_PMPin.h"
 
 #ifndef __sysadmin_H
 #define __sysadmin_H 2016
 class sysadmin : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
-    Fl_Menu_Item commands[14] = {
-	{"&Info",FL_ALT+'c', 0, 0, FL_SUBMENU},
-	{"&Update My Info",FL_ALT+'u', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
-	{0},
-	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
-	{"&Create Order",FL_ALT+'c', 0, 0},
-	{"View &My Orders",FL_ALT+'m', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
+    gui_PMPin pmpin_win;
+    Fl_Menu_Item commands[16] = {
+	{"&Maintain System",FL_ALT+'m', 0, 0, FL_SUBMENU},
+	{"Change &Boss Pin",FL_ALT+'b', 0, 0},
+	{"Change &Project Manager Pin",FL_ALT+'p', change_pm, this},
+	{"View &Customer Pins",FL_ALT+'c', 0, 0},
+	{"View &Sales Associate Pins",FL_ALT+'s', 0, 0},
 	{0},
 	{0},
     };
+
+    //this is the callback combo to change the project manager pin
+    inline void change_pm_i(){
+	pmpin_win.show();
+	pmpin_win.sys_res_vals();
+    }
+    static void change_pm(Fl_Widget*w, void*data){
+	((sysadmin*)data)->change_pm_i();
+    }
+
+    //this is the callback combo to logout of the sstem admin window
     inline void logout_clicked_i(){
 	this->hide();
 	((this->parent())->child(0))->show();

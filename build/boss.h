@@ -18,16 +18,22 @@
 class boss : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
-    Fl_Menu_Item commands[14] = {
+    Fl_Menu_Item commands[20] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
-	{"&View all orders",FL_ALT+'u', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
+	{"View &Catalogue",FL_ALT+'c', 0, 0},
+	{"&View all orders",FL_ALT+'v', 0, 0},
 	{0},
-	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
-	{"&Create Order",FL_ALT+'c', 0, 0},
-	{"View &My Orders",FL_ALT+'m', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
+	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},	
+	{"&Create Customer",FL_ALT+'c', 0, 0},
+	{"&View all Customers", FL_ALT + 'v', 0, 0},
+	{"View &Orders by Customer",FL_ALT+'o', 0, 0},
+	{"&Adjust Credentials", FL_ALT + 'a', 0, 0},
+	{0},
+	{"&Sales Associates",FL_ALT+'s', 0, 0, FL_SUBMENU},	
+	{"&Create Associate",FL_ALT+'c', 0, 0},
+	{"&View all Associates", FL_ALT + 'v', 0, 0},
+	{"View &Orders by Associates",FL_ALT+'o', 0, 0},
+	{"&Adjust Pay", FL_ALT + 'a', 0, 0},
 	{0},
 	{0},
     };
