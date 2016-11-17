@@ -24,7 +24,6 @@ class view_head : public Fl_Group{
 	Fl_Box laser;
 	Fl_Box part;
 	Fl_Choice SN_choice;
-	Fl_Menu_Item choices[10000];
 	int size = 0;
 	int i = 0;
 

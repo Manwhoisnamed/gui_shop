@@ -25,7 +25,6 @@ class view_leg : public Fl_Group{
 	Fl_Output weight;
 	Fl_Output speed;
 	Fl_Choice SN_choice;
-	Fl_Menu_Item choices[10000];
 	int size = 0;
 	int i = 0;
 

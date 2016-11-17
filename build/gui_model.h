@@ -8,6 +8,8 @@
 #include <Fl/Fl_Box.H>
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Multiline_Input.H>
+#include <Fl/Fl_Choice.H>
+#include <Fl/Fl_Menu_Item.H>
 
 #ifndef __gui_model_H
 #define __gui_model_H 2016
@@ -55,6 +57,66 @@ class gui_model: public Fl_Window{
     Fl_Box description_error;
     Fl_Button create;
     Fl_Button cancel;
+    int headSize;
+    int legSize;
+    int torsoSize;
+    int arm1Size;
+    int arm2Size;
+    int bat1Size;
+    int bat2Size;
+    int bat3Size;
+
+    void initialize_choices(){
+	headSize = storage.headSize();
+	for(int x = 0; x < headSize; x ++){
+		head_pin.add((to_string(storage.getHead(x).getSN()) + " - " + storage.getHead(x).getName()).c_str());
+	}
+	if(headSize > 0){
+	    head_pin.value(0);
+	}
+
+        legSize = storage.legSize();
+	for(int x = 0; x < legSize; x ++){
+		leg_pin.add((to_string(storage.getLeg(x).getSN()) + " - " + storage.getLeg(x).getName()).c_str());
+	}
+	if(legSize > 0){
+	    leg_pin.value(0);
+	}
+
+        torsoSize = storage.torsoSize();
+	for(int x = 0; x < torsoSize; x ++){
+		torso_pin.add((to_string(storage.getTorso(x).getSN()) + " - " + storage.getTorso(x).getName()).c_str());
+	}
+	if(torsoSize > 0){
+	    torso_pin.value(0);
+	}
+
+        arm1Size = storage.armSize();
+	arm2Size = arm1Size;
+	for(int x = 0; x < arm1Size; x ++){
+		arm1_pin.add((to_string(storage.getArm(x).getSN()) + " - " + storage.getArm(x).getName()).c_str());
+		arm2_pin.add((to_string(storage.getArm(x).getSN()) + " - " + storage.getArm(x).getName()).c_str());	
+	}
+	if(arm1Size > 0){
+	    arm1_pin.value(0);
+	    arm2_pin.value(0);
+	}
+
+        bat1Size = storage.batterySize();
+	bat2Size = bat1Size;
+	bat3Size = bat1Size;
+	for(int x = 0; x < bat1Size; x ++){
+		bat1_pin.add((to_string(storage.getBattery(x).getSN()) + " - " + storage.getBattery(x).getName()).c_str());
+		bat2_pin.add((to_string(storage.getBattery(x).getSN()) + " - " + storage.getBattery(x).getName()).c_str());
+		bat3_pin.add((to_string(storage.getBattery(x).getSN()) + " - " + storage.getBattery(x).getName()).c_str());
+	}
+	if(bat1Size > 0){
+	    bat1_pin.value(0);
+	    bat2_pin.value(0);
+	    bat3_pin.value(0);
+	}
+
+    }
 
     public:
 	gui_model():
@@ -110,6 +172,7 @@ class gui_model: public Fl_Window{
 	    MN_error.labelcolor(FL_RED);
 	    description_error.labelcolor(FL_RED);
 	    price_error.labelcolor(FL_RED);
+	    initialize_choices();
 	}
 		
 };
