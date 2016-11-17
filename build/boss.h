@@ -19,8 +19,9 @@ class boss : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
     Fl_Menu_Item commands[14] = {
-	{"&Info",FL_ALT+'c', 0, 0, FL_SUBMENU},
-	{"&Update My Info",FL_ALT+'u', 0, 0},
+	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
+	{"&View all orders",FL_ALT+'u', 0, 0},
+	{"&View Catalogue",FL_ALT+'v', 0, 0},
 	{"&View Catalogue",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	

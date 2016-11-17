@@ -23,6 +23,7 @@
 #include "view_head.h"
 #include "view_battery.h"
 #include "view_torso.h"
+#include "gui_PMPin.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -40,6 +41,7 @@ class workshop : public Fl_Window{
     view_head head_view;
     view_battery battery_view;
     view_torso torso_view;
+    gui_PMPin pin_win;
     Fl_Menu_Item manage[21] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
@@ -59,10 +61,19 @@ class workshop : public Fl_Window{
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
 	{"Stop &Viewing",FL_ALT+'v', hide_all, this},
-	{"Change &Pin",FL_ALT+'p', 0, 0},	
+	{"Change &Pin",FL_ALT+'p', change_pin, this},	
 	{0},
 	{0}
     };
+
+    //callback combo to change the pin
+    inline void change_pin_i(){
+	pin_win.show();
+	pin_win.reset_vals();
+    }
+    static void change_pin(Fl_Widget*w, void*data){
+	((workshop*)data)->change_pin_i();
+    }
 
     //callback combo for the view torso button
     inline void view_torso_view_i(){

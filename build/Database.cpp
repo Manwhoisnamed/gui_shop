@@ -3,6 +3,9 @@
 
 #include "Database.h"
 
+void Database::changePMPin(int pin){
+    Database::PMPin = pin;
+}
 
 void Database::addOrder(Order order){
     Database::orders.push_back(order);
@@ -50,7 +53,7 @@ bool Database::checkPin(int pin){
 void Database::saveData(){
     int i = 0;
     ofstream myfile("Database.txt");
-   
+    myfile << bossPin << " " << PMPin << "\n";
     //stores the customers
     myfile << "Customers================\n";
     for(i = 0; i < Database::customers.size(); i ++){

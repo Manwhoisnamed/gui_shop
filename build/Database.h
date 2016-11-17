@@ -24,6 +24,7 @@ class Database{
 	//pin setters and getters
 	int getPMPin();
 	int getBossPin();
+	void changePMPin(int pin);
 	
 	//customer based things
 	Customer loadCustomer(int pin);
