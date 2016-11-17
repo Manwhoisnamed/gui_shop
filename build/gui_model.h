@@ -33,7 +33,7 @@ class gui_model: public Fl_Window{
     Fl_Choice bat3_pin;
     Fl_Output bspace;
     Fl_Output speed;
-    Fl_Output life;
+    Fl_Output passiveLife;
     Fl_Output cost;
     Fl_Output weight;
     Fl_Box name_header;
@@ -42,19 +42,23 @@ class gui_model: public Fl_Window{
     Fl_Box div1;
     Fl_Box div2;
     Fl_Box div3;
-    Fl_Box arm1_laser;
-    Fl_Box arm2_laser;
+    Fl_Box arm_laser;
+    Fl_Output activeLife;
     Fl_Box head_laser;
     Fl_Input name;
     Fl_Box name_error;
     Fl_Input MN;
     Fl_Box MN_error;
-    //Fl_Multiline_Input description;
-
+    Fl_Input price;
+    Fl_Box price_error;
+    Fl_Multiline_Input description;
+    Fl_Box description_error;
+    Fl_Button create;
+    Fl_Button cancel;
 
     public:
 	gui_model():
-	Fl_Window(1000, 315),
+	Fl_Window(975, 315, "Rockin Robomodel Maker"),
 	refresh(5,5,100,25,"Refresh"),
 	torso_name(110,35,125,25, "Torso"),
 	head_name(110,65,125,25, "Head"),
@@ -76,20 +80,26 @@ class gui_model: public Fl_Window{
 	pin_header(240,5,125,25, "Pin"),
 	stats_header(480,5,100,25, "Stats"),
 	div1(370, 5, 5, 270, ""),
-	div2(580, 5, 5, 270, ""),
-	div3(5, 275, 580, 5, ""),
-	bspace(480, 35, 100,25, "Battery Space"),
-	speed(480,65,100,25,"Speed (Km)"),
-	head_laser(480,95,100,25,"test"),
-	arm1_laser(480,125,100,25,"test"),
-	arm2_laser(480,155,100,25,"test"),
-	life(480,185,100,25,"Life (Hr)"),
-	cost(480,215,100,25,"Cost (USD)"),
-	weight(480,245,100,25,"Weight (Kg)"),
-	name(110, 285, 100, 25, "Name"),
-	name_error(215, 285, 100, 25, "Needs Name"),
-	MN(425, 285, 100, 25, "Model Number"),
-	MN_error(530, 285, 100,25, "Need Integer"){
+	div2(600, 5, 5, 270, ""),
+	div3(5, 275, 600, 5, ""),
+	bspace(500, 35, 100,25, "Battery Space"),
+	speed(500,65,100,25,"Speed (Km)"),
+	head_laser(500,95,100,25,"test"),
+	arm_laser(500,125,100,25,"test"),
+	activeLife(500,155,100,25,"Active Life (Hr)"),
+	passiveLife(500,185,100,25,"Passive Life (Hr)"),
+	cost(500,215,100,25,"Cost (USD)"),
+	weight(500,245,100,25,"Weight (Kg)"),
+	name(50, 285, 100, 25, "Name"),
+	name_error(155, 285, 100, 25, "Needs Name"),
+	price(305, 285, 100, 25, "Price"),
+	price_error(405, 285, 100,25, "Need Double"),
+	MN(625, 285, 100, 25, "Model Number"),
+	MN_error(730, 285, 100,25, "Need Integer"),
+	description(690, 175, 175, 100, "Description"),
+	description_error(590, 175, 125, 25, "Test"),
+	create(870, 255, 100, 25, "Create"),
+	cancel(870, 285, 100, 25, "Cancel"){
 	    div1.box(FL_UP_BOX);
 	    div1.color(FL_BLACK);
 	    div2.box(FL_UP_BOX);
@@ -98,6 +108,8 @@ class gui_model: public Fl_Window{
 	    div3.color(FL_BLACK);
 	    name_error.labelcolor(FL_RED);
 	    MN_error.labelcolor(FL_RED);
+	    description_error.labelcolor(FL_RED);
+	    price_error.labelcolor(FL_RED);
 	}
 		
 };
