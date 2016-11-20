@@ -102,8 +102,8 @@ void Storage::store(){
 	myfile << arms.at(i).getSN() << " " << arms.at(i).getWeight() << " " << arms.at(i).getCost() << " " << arms.at(i).getpassiveDraw() << " " << arms.at(i).getactiveDraw() << " " << arms.at(i).getLaser() << "\n"; 
         myfile << arms.at(i).getName() << "\n";
         myfile << arms.at(i).getDescription() << "\n";
-	myfile << arms.at(i).getPicture() << "\n";
     	myfile << "-2end\n";
+	myfile << arms.at(i).getPicture() << "\n";
     }
     myfile << "-1\n";
 
@@ -113,8 +113,8 @@ void Storage::store(){
 	myfile << heads.at(i).getSN() << " " << heads.at(i).getWeight() << " " << heads.at(i).getCost() << " " << heads.at(i).getDraw() << " " << heads.at(i).getLaser() << "\n"; 
         myfile << heads.at(i).getName() << "\n";
         myfile << heads.at(i).getDescription() << "\n";
-	myfile << heads.at(i).getPicture() << "\n";
     	myfile << "-2end\n";
+	myfile << heads.at(i).getPicture() << "\n";
     }
     myfile << "-1\n";
 
@@ -124,8 +124,8 @@ void Storage::store(){
 	myfile << torsos.at(i).getSN() << " " << torsos.at(i).getWeight() << " " << torsos.at(i).getCost() << " " << torsos.at(i).getDraw() << " " << torsos.at(i).getBSpace() << "\n"; 
         myfile << torsos.at(i).getName() << "\n";
         myfile << torsos.at(i).getDescription() << "\n";
-	myfile << torsos.at(i).getPicture() << "\n";
     	myfile << "-2end\n";
+	myfile << torsos.at(i).getPicture() << "\n";
     }
     myfile << "-1\n";
 
@@ -135,8 +135,8 @@ void Storage::store(){
 	myfile << legs.at(i).getSN() << " " << legs.at(i).getWeight() << " " << legs.at(i).getCost() << " " << legs.at(i).getpassiveDraw() << " " << legs.at(i).getactiveDraw() << " " << legs.at(i).getSpeed() << "\n"; 
         myfile << legs.at(i).getName() << "\n";
         myfile << legs.at(i).getDescription() << "\n";
-	myfile << legs.at(i).getPicture() << "\n";
     	myfile << "-2end\n";
+	myfile << legs.at(i).getPicture() << "\n";
     }
     myfile << "-1\n";
     

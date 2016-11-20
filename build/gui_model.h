@@ -67,6 +67,7 @@ class gui_model: public Fl_Window{
     int bat3Size;
     int bats = 1;
 
+    //intialize the choices
     void initialize_choices(){
 	headSize = storage.headSize();
 	head_pin.add("Choose Part");
