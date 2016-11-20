@@ -150,6 +150,7 @@ class workshop : public Fl_Window{
     //callback combo to make a gui leg window
     inline void make_gui_model_i(){
 	model_win.show();
+	model_win.reset_values();
     }
     static void make_gui_model(Fl_Widget*w, void*data){
 	((workshop*)data)->make_gui_model_i();
