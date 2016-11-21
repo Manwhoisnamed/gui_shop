@@ -119,7 +119,7 @@ class gui_head : public Fl_Window{
 	SN(150,35,100,25, "SN"),
 	cost(150,65,100,25, "Cost (USD)"),
 	weight(150,95,100,25, "Weight (KG)"),
-	draw(150,125,100,25, "Active Draw (KW)"),
+	draw(150,125,100,25, "Draw (KW)"),
 	laser(150,155,100,25,"Laser"),
 	description(150,185,175,125,"Description"),
 	cancel(495, 355, 100, 25, "Cancel"),

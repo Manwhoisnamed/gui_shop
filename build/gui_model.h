@@ -66,6 +66,16 @@ class gui_model: public Fl_Window{
     int bat2Size;
     int bat3Size;
     int bats = 1;
+	
+    int headlast = 0;
+    int leglast = 0;
+    int torsolast = 0;
+    int arm1last = 0;
+    int arm2last = 0;
+    int bat1last = 0;
+    int bat2last = 0;
+    int bat3last = 0;
+
 
     //intialize the choices
     void initialize_choices(){
@@ -128,6 +138,7 @@ class gui_model: public Fl_Window{
 
     }
 
+    //callback combo to refresh the choices
     inline void refresh_choices_i(){
 	int x = headSize;
 	headSize = storage.headSize();
@@ -180,13 +191,27 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the head update
     inline void head_select_i(){
+	if(headlast != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getHead(headlast - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getHead(headlast - 1).getWeight()).c_str());       	    
+	    
+	}	
+	//calculateLife();
 	if(head_pin.value() > 0){
 	    head_name.value(storage.getHead(head_pin.value() - 1).getName().c_str());
-	    
+	    if(storage.getHead(head_pin.value() - 1).getLaser()){
+		head_laser.label("Contains Head Laser");
+	    }
+	    else{
+	        head_laser.label("");
+	    }
+	    cost.value(to_string(atof(cost.value()) + storage.getHead(head_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getHead(head_pin.value() - 1).getWeight()).c_str());   
  	}
 	else{
 	    head_name.value("");
 	}
+	headlast = head_pin.value();
     }
     static void head_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->head_select_i();
@@ -194,14 +219,22 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the leg update
     inline void leg_select_i(){
+	if(leglast != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getLeg(leglast - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getLeg(leglast - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(leg_pin.value() > 0){
 	    leg_name.value(storage.getLeg(leg_pin.value() - 1).getName().c_str());
 	    speed.value(to_string(storage.getLeg(leg_pin.value() - 1).getSpeed()).c_str());
+	    cost.value(to_string(atof(cost.value()) + storage.getLeg(leg_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getLeg(leg_pin.value() - 1).getWeight()).c_str());   
  	}
 	else{
 	    leg_name.value("");
 	    speed.value("0");
 	}
+	leglast = leg_pin.value();
     }
     static void leg_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->leg_select_i();
@@ -209,6 +242,11 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the torso update
     inline void torso_select_i(){
+	if(torsolast != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getTorso(torsolast - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getTorso(torsolast - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(torso_pin.value() > 0){
 	    torso_name.value(storage.getTorso(torso_pin.value() - 1).getName().c_str());
 	    bats = storage.getTorso(torso_pin.value() - 1).getBSpace();
@@ -221,10 +259,13 @@ class gui_model: public Fl_Window{
 		bat3_name.activate();
 		bat3_pin.activate();
 	    }
+	    cost.value(to_string(atof(cost.value()) + storage.getTorso(torso_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getTorso(torso_pin.value() - 1).getWeight()).c_str()); 
  	}
 	else{
 	    torso_name.value("");
 	}
+	torsolast = torso_pin.value();
     }
     static void torso_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->torso_select_i();
@@ -232,16 +273,32 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the arm1 update
     inline void arm1_select_i(){
+	if(arm1last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getArm(arm1last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getArm(arm1last - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(arm1_pin.value() > 0){
 	    arm1_name.value(storage.getArm(arm1_pin.value() - 1).getName().c_str());
 	    arm2_pin.activate();	
 	    arm2_name.activate();    
+	    cost.value(to_string(atof(cost.value()) + storage.getArm(arm1_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getArm(arm1_pin.value() - 1).getWeight()).c_str());
+	    if(arm2last != 0 && arm1last == 0){
+		cost.value(to_string(atof(cost.value()) + storage.getArm(arm2last - 1).getCost()).c_str());       
+		weight.value(to_string(atof(weight.value()) + storage.getArm(arm2last - 1).getWeight()).c_str());    
+	    }    
  	}
 	else{
 	    arm1_name.value("");
 	    arm2_pin.deactivate();
 	    arm2_name.deactivate();
+	    if(arm2last != 0){
+		cost.value(to_string(atof(cost.value()) - storage.getArm(arm2last - 1).getCost()).c_str());       
+		weight.value(to_string(atof(weight.value()) - storage.getArm(arm2last - 1).getWeight()).c_str());    
+	    }
 	}
+	arm1last = arm1_pin.value();
     }
     static void arm1_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->arm1_select_i();
@@ -249,12 +306,20 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the arm2 update
     inline void arm2_select_i(){
+	if(arm2last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getArm(arm2last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getArm(arm2last - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(arm2_pin.value() > 0){
 	    arm2_name.value(storage.getArm(arm2_pin.value() - 1).getName().c_str());
+	    cost.value(to_string(atof(cost.value()) + storage.getArm(arm2_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getArm(arm2_pin.value() - 1).getWeight()).c_str());
  	}
 	else{
 	    arm2_name.value("");
 	}
+	arm2last = arm2_pin.value();
     }
     static void arm2_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->arm2_select_i();
@@ -342,8 +407,8 @@ class gui_model: public Fl_Window{
 	div3(5, 275, 600, 5, ""),
 	bspace(500, 35, 100,25, "Battery Space"),
 	speed(500,65,100,25,"Speed (Km\\Hr)"),
-	head_laser(500,95,100,25,""),
-	arm_laser(500,125,100,25,""),
+	head_laser(400,95,200,25,""),
+	arm_laser(400,125,200,25,""),
 	activeLife(500,155,100,25,"Active Life (Hr)"),
 	passiveLife(500,185,100,25,"Passive Life (Hr)"),
 	cost(500,215,100,25,"Cost (USD)"),
@@ -420,6 +485,15 @@ class gui_model: public Fl_Window{
 	     description.value("");
 	     MN.value("");
 	     price.value("");
+
+    	     headlast = 0;
+    	     leglast = 0;
+             torsolast = 0;
+    	     arm1last = 0;
+    	     arm2last = 0;
+    	     bat1last = 0;
+    	     bat2last = 0;
+    	     bat3last = 0;
 	}
 
 };

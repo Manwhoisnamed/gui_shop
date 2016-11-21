@@ -78,6 +78,11 @@ asdg
 
 -2end
 default
+46 654 46 21 1
+laser
+This is a vague description
+-2end
+placeholder
 -1
 TORSOS========================
 100 20 2 4 1
@@ -118,6 +123,13 @@ default
 456 34 456 9 12 1234
 leggy
 Leggy blonde, goodbye
+-2end
+placeholder
+12132 21 12132 12 21 654
+leg test
+faiush
+afsugofsad
+afkbu
 -2end
 placeholder
 -1
