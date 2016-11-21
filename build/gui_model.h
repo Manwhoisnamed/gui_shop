@@ -254,10 +254,40 @@ class gui_model: public Fl_Window{
 	    if(bats > 1 && bat1_pin.value() != 0){
 		bat2_name.activate();
 		bat2_pin.activate();
+		if(bat2last != 0){
+	    	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat2_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat2_pin.value() - 1).getWeight()).c_str());
+		}
+	        if(bats > 2 && bat2_pin.value() != 0){
+		    bat3_name.activate();
+		    bat3_pin.activate();
+		    if(bat3last != 0){
+	    	     	cost.value(to_string(atof(cost.value()) + storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	    	weight.value(to_string(atof(weight.value()) + storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str());
+		    }
+	        }
 	    }
-	    if(bats > 2 && bat2_pin.value() != 0){
-		bat3_name.activate();
-		bat3_pin.activate();
+	    if(bats == 1){
+		bat2_name.deactivate();
+		bat2_pin.deactivate();
+		if(bat2last != 0){
+	    	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat2_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat2_pin.value() - 1).getWeight()).c_str()); 
+		}
+		bat3_name.deactivate();
+		bat3_pin.deactivate();
+		if(bat3last != 0){
+	    	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
+		}
+	    }
+	    if(bats == 2){
+		bat3_name.deactivate();
+		bat3_pin.deactivate();
+		if(bat3last != 0){
+	    	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
+		}
 	    }
 	    cost.value(to_string(atof(cost.value()) + storage.getTorso(torso_pin.value() - 1).getCost()).c_str());       
 	    weight.value(to_string(atof(weight.value()) + storage.getTorso(torso_pin.value() - 1).getWeight()).c_str()); 
@@ -284,6 +314,17 @@ class gui_model: public Fl_Window{
 	    arm2_name.activate();    
 	    cost.value(to_string(atof(cost.value()) + storage.getArm(arm1_pin.value() - 1).getCost()).c_str());       
 	    weight.value(to_string(atof(weight.value()) + storage.getArm(arm1_pin.value() - 1).getWeight()).c_str());
+	    if(storage.getArm(arm1_pin.value() - 1).getLaser()){
+		arm_laser.label("Arm laser equipped");
+	    }
+	    else{
+		arm_laser.label("");
+		if(arm2last != 0){
+		    if(storage.getArm(arm2last - 1).getLaser()){
+		        arm_laser.label("Arm laser equipped");
+		    }
+		}
+	    }
 	    if(arm2last != 0 && arm1last == 0){
 		cost.value(to_string(atof(cost.value()) + storage.getArm(arm2last - 1).getCost()).c_str());       
 		weight.value(to_string(atof(weight.value()) + storage.getArm(arm2last - 1).getWeight()).c_str());    
@@ -293,6 +334,7 @@ class gui_model: public Fl_Window{
 	    arm1_name.value("");
 	    arm2_pin.deactivate();
 	    arm2_name.deactivate();
+	    arm_laser.label("");
 	    if(arm2last != 0){
 		cost.value(to_string(atof(cost.value()) - storage.getArm(arm2last - 1).getCost()).c_str());       
 		weight.value(to_string(atof(weight.value()) - storage.getArm(arm2last - 1).getWeight()).c_str());    
@@ -313,6 +355,12 @@ class gui_model: public Fl_Window{
 	}
 	if(arm2_pin.value() > 0){
 	    arm2_name.value(storage.getArm(arm2_pin.value() - 1).getName().c_str());
+	    if(storage.getArm(arm2_pin.value() - 1).getLaser() && storage.getArm(arm2_pin.value() - 1).getLaser()){
+		arm_laser.label("Arm laser equipped");
+	    }
+	    else if(!storage.getArm(arm1_pin.value() - 1).getLaser()){
+		arm_laser.label("");
+	    }
 	    cost.value(to_string(atof(cost.value()) + storage.getArm(arm2_pin.value() - 1).getCost()).c_str());       
 	    weight.value(to_string(atof(weight.value()) + storage.getArm(arm2_pin.value() - 1).getWeight()).c_str());
  	}
@@ -327,11 +375,26 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the bat1 update
     inline void bat1_select_i(){
+	if(bat1last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat1last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat1last - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(bat1_pin.value() > 0){
 	    bat1_name.value(storage.getBattery(bat1_pin.value() - 1).getName().c_str());
+	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat1_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat1_pin.value() - 1).getWeight()).c_str()); 
 	    if(bats > 1){
 	 	bat2_name.activate();	
 		bat2_pin.activate();
+		if(bat2last != 0){
+	    	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat2_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat2_pin.value() - 1).getWeight()).c_str()); 
+		}
+		if(bat3last != 0){
+	    	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
+		}
 	    }
  	}
 	else{
@@ -339,8 +402,19 @@ class gui_model: public Fl_Window{
 	    bat2_name.deactivate();
 	    bat2_pin.deactivate();
 	    bat3_name.deactivate();
-	    bat3_pin.deactivate();
+	    bat3_pin.deactivate();  
+	if(bat2last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat2last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat2last - 1).getWeight()).c_str());       	    
+	    
 	}
+	if(bat3last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat3last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat3last - 1).getWeight()).c_str());       	    
+	    
+	}  	
+	}
+	bat1last = bat1_pin.value();
     }
     static void bat1_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->bat1_select_i();
@@ -348,18 +422,34 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the bat2 update
     inline void bat2_select_i(){
+	if(bat2last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat2last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat2last - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(bat2_pin.value() > 0){
 	    bat2_name.value(storage.getBattery(bat2_pin.value() - 1).getName().c_str());
 	    if(bats > 2){
 	 	bat3_name.activate();	
 		bat3_pin.activate();
+		if(bat3last != 0){
+	    	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
+		}
 	    }
+	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat2_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat2_pin.value() - 1).getWeight()).c_str());
  	}
 	else{
 	    bat2_name.value("");
 	    bat3_name.deactivate();
 	    bat3_pin.deactivate();
+	    if(bat3last != 0){
+	    	cost.value(to_string(atof(cost.value()) - storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    	weight.value(to_string(atof(weight.value()) - storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
+	    }
 	}
+	bat2last = bat2_pin.value();
     }
     static void bat2_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->bat2_select_i();
@@ -367,12 +457,20 @@ class gui_model: public Fl_Window{
 
     //callback combo to get the bat3 update
     inline void bat3_select_i(){
+	if(bat3last != 0){
+	    cost.value(to_string(atof(cost.value()) - storage.getBattery(bat3last - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) - storage.getBattery(bat3last - 1).getWeight()).c_str());       	    
+	    
+	}
 	if(bat3_pin.value() > 0){
 	    bat3_name.value(storage.getBattery(bat3_pin.value() - 1).getName().c_str());
+	    cost.value(to_string(atof(cost.value()) + storage.getBattery(bat3_pin.value() - 1).getCost()).c_str());       
+	    weight.value(to_string(atof(weight.value()) + storage.getBattery(bat3_pin.value() - 1).getWeight()).c_str()); 
  	}
 	else{
 	    bat3_name.value("");
 	}
+	bat3last = bat3_pin.value();
     }
     static void bat3_select(Fl_Widget* w, void* data){
  	((gui_model*)data)->bat3_select_i();
