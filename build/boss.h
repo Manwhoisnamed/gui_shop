@@ -12,13 +12,15 @@
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
+#include "gui_bosspin.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
 class boss : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
-    Fl_Menu_Item commands[20] = {
+    gui_bosspin pin_changer;
+    Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', 0, 0},
 	{"&View all orders",FL_ALT+'v', 0, 0},
@@ -35,14 +37,28 @@ class boss : public Fl_Window{
 	{"View &Orders by Associates",FL_ALT+'o', 0, 0},
 	{"&Adjust Pay", FL_ALT + 'a', 0, 0},
 	{0},
+	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
+	{"&Stop Viewing",FL_ALT+'s', 0, 0},
+	{"&Change Pin",FL_ALT+'c', change_pin, this},	
 	{0},
     };
+
+    //callback combo to logout of the boss page
     inline void logout_clicked_i(){
 	this->hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){
 	((boss*)data)->logout_clicked_i();
+    }
+
+    //callback combo to change the boss pin
+    inline void change_pin_i(){
+	pin_changer.reset_vals();
+	pin_changer.show();	
+    }
+    static void change_pin(Fl_Widget*w, void*data){
+	((boss*)data)->change_pin_i();
     }
 
   public:

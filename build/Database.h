@@ -25,6 +25,7 @@ class Database{
 	int getPMPin();
 	int getBossPin();
 	void changePMPin(int pin);
+	void changeBossPin(int pin);
 	
 	//customer based things
 	Customer loadCustomer(int pin);

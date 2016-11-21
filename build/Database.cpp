@@ -7,6 +7,10 @@ void Database::changePMPin(int pin){
     Database::PMPin = pin;
 }
 
+void Database::changeBossPin(int pin){
+    Database::bossPin = pin;
+}
+
 void Database::addOrder(Order order){
     Database::orders.push_back(order);
 }
