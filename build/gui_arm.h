@@ -36,10 +36,6 @@ class gui_arm : public Fl_Window{
     Fl_Button cancel;
     Fl_Button create;    
     Fl_File_Chooser chooser;
-    Fl_Button pic_button;
-    Fl_Box pic_response;
-    Fl_Box pic_holder;
-    Fl_JPEG_Image pic;
 
     //callback combo to make the window close
     inline void create_clicked_i(){
@@ -129,19 +125,9 @@ class gui_arm : public Fl_Window{
 	((gui_arm*)data)->cancel_clicked_i();
     }
 
-    //callback combo to update the pic
-    inline void get_pic_i(){
-	chooser.show();
-	pic_response.label(chooser.value());
-	
-    }
-    static void get_pic(Fl_Widget*w, void*data){
-	((gui_arm*)data)->get_pic_i();
-    }
-
     public:
 	gui_arm() :
-	Fl_Window(600, 415, "RoboPart Arm Construction"),
+	Fl_Window(600, 385, "RoboPart Arm Construction"),
 	name(150,5,100,25, "Name"),
 	SN(150,35,100,25, "SN"),
 	cost(150,65,100,25, "Cost (USD)"),
@@ -150,8 +136,8 @@ class gui_arm : public Fl_Window{
 	passiveDraw(150,155,100,25, "Passive Draw (KW)"),
 	laser(150,185,100,25,"Laser"),
 	description(150,215,175,135,"Description"),
-	cancel(495, 385, 100, 25, "Cancel"),
-	create(390, 385, 100, 25, "Create"),
+	cancel(495, 355, 100, 25, "Cancel"),
+	create(390, 355, 100, 25, "Create"),
 	name_response(255, 5, 115, 25),
 	sn_response(255, 35,115,25),
 	cost_response(255, 65, 115, 25),
@@ -159,16 +145,10 @@ class gui_arm : public Fl_Window{
 	active_response(255, 125, 115, 25),
 	passive_response(255, 155,115,25),
 	description_response(5, 215, 140, 25),
-	chooser("/home/","*.jpg",1,"File Chooser Supreme"),
-	pic_button(150,355,100,25, "Picture"),
-	pic_response(255,355,345,25, ""),
-	pic_holder(450,200,50,50,""),
-        pic("../home/Downloads/hqdefault.jpg"){
+	chooser("/home/","*.jpg",1,"File Chooser Supreme"){
 	    cancel.callback(cancel_clicked,this);
 	    create.callback(create_clicked,this);
-	    pic_button.callback(get_pic, this);
 	    laser.type(FL_TOGGLE_BUTTON);
-	    pic_holder.image(pic);
 	}
 
         void clear_fields(){

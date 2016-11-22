@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "gui_customer.h"
 #include "gui_order.h"
+#include "view_model.h"
 
 #ifndef __pos_H
 #define __pos_H 2016
@@ -22,6 +23,7 @@ class pos : public Fl_Window{
     Fl_Menu_Bar menu;
     gui_customer customer_win;
     gui_order order_win;
+    view_model model_view;
     Fl_Menu_Item commands[20] = {
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},
 	{"Create &Customer",FL_ALT+'c', create_customer, this},
@@ -30,14 +32,31 @@ class pos : public Fl_Window{
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
 	{"Create &Order",FL_ALT+'o', create_order, this},
 	{"View My &Sales",FL_ALT+'s', 0, 0},
-	{"View &Catalogue",FL_ALT+'c', 0, 0},
+	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
 	{0},
 	{"&Help", FL_ALT+ 'h', 0,0, FL_SUBMENU},
-	{"&Clear Viewer", FL_ALT + 'c', 0,0},
+	{"&Clear Viewer", FL_ALT + 'c', hide_all,this},
 	{"Change &Name", FL_ALT + 'n', 0,0},
 	{0},
 	{0}
     };
+
+    //callback combo to view models
+    inline void hide_all_i(){
+	model_view.hide();
+    }
+    static void hide_all(Fl_Widget*w, void*data){
+	((pos*)data)->hide_all_i();
+    }
+
+    //callback combo to hide all
+    inline void view_model_view_i(){
+	model_view.show();
+	model_view.reset_values();
+    }
+    static void view_model_view(Fl_Widget*w, void*data){
+	((pos*)data)->view_model_view_i();
+    }
 
     //callback combo to create an order
     inline void create_order_i(){
@@ -60,6 +79,7 @@ class pos : public Fl_Window{
     //callback combo to logout
     inline void logout_clicked_i(){
 	this->hide();
+	hide_all_i();
 	order_win.hide();
 	customer_win.hide();
 	((this->parent())->child(0))->show();
@@ -75,6 +95,8 @@ class pos : public Fl_Window{
 	menu(0,0,1000,20){
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
+	    this->add(model_view);
+	    model_view.hide();
         };
 };
 #endif

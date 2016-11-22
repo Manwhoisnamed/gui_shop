@@ -15,6 +15,7 @@
 #include "gui_bosspin.h"
 #include "gui_customer.h"
 #include "gui_salesman.h"
+#include "view_model.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
@@ -24,9 +25,10 @@ class boss : public Fl_Window{
     gui_bosspin pin_changer;
     gui_customer customer_win;
     gui_salesman sales_win;
+    view_model model_view;
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
-	{"View &Catalogue",FL_ALT+'c', 0, 0},
+	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
 	{"&View all orders",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},	
@@ -42,10 +44,18 @@ class boss : public Fl_Window{
 	{"&Adjust Pay", FL_ALT + 'a', 0, 0},
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
-	{"&Stop Viewing",FL_ALT+'s', 0, 0},
+	{"&Stop Viewing",FL_ALT+'s', hide_all, this},
 	{"&Change Pin",FL_ALT+'c', change_pin, this},	
 	{0},
     };
+
+    //callback combo to hide_all_windows and groups
+    inline void hide_all_i(){
+	model_view.hide();
+    }
+    static void hide_all(Fl_Widget*w, void*data){
+	((boss*)data)->hide_all_i();
+    }
 
     //callback combo to create a customer
     inline void create_customer_i(){
@@ -68,9 +78,10 @@ class boss : public Fl_Window{
     //callback combo to logout of the boss page
     inline void logout_clicked_i(){
 	this->hide();
-	pin_changer.hide();
+	hide_all_i();
 	customer_win.hide();
 	sales_win.hide();
+	pin_changer.hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){
@@ -86,6 +97,16 @@ class boss : public Fl_Window{
 	((boss*)data)->change_pin_i();
     }
 
+    //callback combo to view the models
+    inline void view_model_view_i(){
+	hide_all_i();
+	model_view.reset_values();
+	model_view.show();	
+    }
+    static void view_model_view(Fl_Widget*w, void*data){
+	((boss*)data)->view_model_view_i();
+    }
+
   public:
 	boss() :
 	Fl_Window(1000,700),
@@ -93,6 +114,8 @@ class boss : public Fl_Window{
 	menu(0,0,1000,20){
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
+	    this->add(model_view);
+	    model_view.hide();
         };
 };
 #endif

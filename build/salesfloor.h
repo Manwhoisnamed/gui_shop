@@ -13,6 +13,7 @@
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
 #include "gui_order.h"
+#include "view_model.h"
 
 #ifndef __salesfloor_H
 #define __salesfloor_H 2016
@@ -20,18 +21,39 @@ class salesfloor : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
     gui_order order_win;
-    Fl_Menu_Item commands[14] = {
+    view_model model_view;
+    Fl_Menu_Item commands[20] = {
 	{"&Info",FL_ALT+'c', 0, 0, FL_SUBMENU},
 	{"&Update My Info",FL_ALT+'u', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
+	{"&View Catalogue",FL_ALT+'v', view_model_view, this},
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
 	{"&Create Order",FL_ALT+'c', create_order, this},
 	{"View &My Orders",FL_ALT+'m', 0, 0},
-	{"&View Catalogue",FL_ALT+'v', 0, 0},
+	{"&View Catalogue",FL_ALT+'v', view_model_view, this},
 	{0},
+	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
+	{"&Stop Viewing",FL_ALT+'s', hide_all, this},
 	{0},
     };
+
+    //callback combo to hide all
+    inline void view_model_view_i(){
+	hide_all_i();
+	model_view.reset_values();
+	model_view.show();
+    }
+    static void view_model_view(Fl_Widget*w, void*data){
+	((salesfloor*)data)->view_model_view_i();
+    }
+
+    //callback combo to hide all
+    inline void hide_all_i(){
+	model_view.hide();
+    }
+    static void hide_all(Fl_Widget*w, void*data){
+	((salesfloor*)data)->hide_all_i();
+    }
 
     //callback combo to create an order
     inline void create_order_i(){
@@ -45,6 +67,7 @@ class salesfloor : public Fl_Window{
     //callback combo to logout
     inline void logout_clicked_i(){
 	this->hide();
+	hide_all_i();
 	order_win.hide();
 	((this->parent())->child(0))->show();
     }
@@ -59,6 +82,8 @@ class salesfloor : public Fl_Window{
 	menu(0,0,1000,20){
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
+	    this->add(model_view);
+	    model_view.hide();
         };
 
 

@@ -139,18 +139,11 @@ class workshop : public Fl_Window{
 
     //callback combo for the hide all button
     inline void hide_all_i(){
-    arm_win.hide();
-    leg_win.hide();
-    head_win.hide();
-    battery_win.hide();
-    torso_win.hide();
-    model_win.hide();
     arm_view.hide();
     leg_view.hide();
     head_view.hide();
     battery_view.hide();
     torso_view.hide();
-    pin_win.hide();
     model_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
@@ -161,6 +154,13 @@ class workshop : public Fl_Window{
     inline void logout_clicked_i(){
 	this->hide();
 	hide_all_i();
+    arm_win.hide();
+    leg_win.hide();
+    head_win.hide();
+    battery_win.hide();
+    torso_win.hide();
+    model_win.hide();
+    pin_win.hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){
