@@ -41,4 +41,7 @@ jimbo
 bobman
 54
 987654
+Computer
+1000
+0
 -1

@@ -25,7 +25,6 @@ class salesfloor : public Fl_Window{
     Fl_Menu_Item commands[20] = {
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
 	{"&Create Order",FL_ALT+'c', create_order, this},
-	{"View &My Orders",FL_ALT+'m', 0, 0},
 	{"&View Catalogue",FL_ALT+'v', view_model_view, this},
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	

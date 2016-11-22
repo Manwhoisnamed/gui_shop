@@ -33,7 +33,6 @@ class pos : public Fl_Window{
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
 	{"Create &Order",FL_ALT+'o', create_order, this},
-	{"View My &Sales",FL_ALT+'s', 0, 0},
 	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
 	{0},
 	{"&Help", FL_ALT+ 'h', 0,0, FL_SUBMENU},

@@ -33,7 +33,6 @@ class boss : public Fl_Window{
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
-	{"&View all orders",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},	
 	{"&Create Customer",FL_ALT+'c', create_customer, this},
@@ -42,7 +41,6 @@ class boss : public Fl_Window{
 	{"&Sales Associates",FL_ALT+'s', 0, 0, FL_SUBMENU},	
 	{"&Create Associate",FL_ALT+'c', create_salesman, this},
 	{"&View all Associates", FL_ALT + 'v', view_allSA_view, this},
-	{"View &Orders by Associates",FL_ALT+'o', 0, 0},
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
 	{"&Stop Viewing",FL_ALT+'s', hide_all, this},
