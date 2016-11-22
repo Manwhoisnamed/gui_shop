@@ -48,6 +48,15 @@ Customer Database::loadCustomerPin(int pin){
     }
 }
 
+int Database::loadCustomerPinIndex(int pin){
+    int i = 0;
+    for(i = 0; i < Database::customers.size(); i ++){
+	if(customers.at(i).getPin() == pin){
+	    return i;
+	}
+    }
+}
+
 salesman Database::loadAssociatePin(int pin){
     int i = 0;
     for(i = 0; i < Database::associates.size(); i ++){
@@ -99,7 +108,7 @@ void Database::saveData(){
     myfile << "-1\n";
     myfile << "Orders===================\n";
     for(i = 0; i < Database::orders.size(); i++){
-	myfile << orders.at(i).getCustomerPin() << " " << orders.at(i).getModelNumber() << " " << orders.at(i).getQuantity() << "\n";
+	myfile << orders.at(i).getCustomerPin() << " " << orders.at(i).getModelNumber() << " " << orders.at(i).getQuantity() << " " << orders.at(i).getAssociatePin() << "\n";
     }
     myfile << "-1\n";
     myfile << "Associates===============\n";
@@ -115,7 +124,7 @@ void Database::saveData(){
 void Database::loadData(Storage storage){
     ifstream myfile("Database.txt");
     string line, name, address;
-    int pin, MN, quantity;
+    int pin, MN, quantity, apin;
     double wage;
   
     //gets the boss and pm pin
@@ -148,12 +157,12 @@ void Database::loadData(Storage storage){
 	    break;
 	}
 	istringstream ordLine(line);
-	ordLine >> pin >> MN >> quantity;
+	ordLine >> pin >> MN >> quantity >> apin;
 	Order order;
 	order.setCustomerPin(pin);
 	order.setModelNumber(MN);
 	order.setQuantity(quantity);
-	order.calculatePrice(storage);
+	order.setAssociatePin(apin);
 	Database::orders.push_back(order);
     }
 

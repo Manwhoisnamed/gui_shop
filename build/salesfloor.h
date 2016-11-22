@@ -12,26 +12,40 @@
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
+#include "gui_order.h"
 
 #ifndef __salesfloor_H
 #define __salesfloor_H 2016
 class salesfloor : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
+    gui_order order_win;
     Fl_Menu_Item commands[14] = {
 	{"&Info",FL_ALT+'c', 0, 0, FL_SUBMENU},
 	{"&Update My Info",FL_ALT+'u', 0, 0},
 	{"&View Catalogue",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
-	{"&Create Order",FL_ALT+'c', 0, 0},
+	{"&Create Order",FL_ALT+'c', create_order, this},
 	{"View &My Orders",FL_ALT+'m', 0, 0},
 	{"&View Catalogue",FL_ALT+'v', 0, 0},
 	{0},
 	{0},
     };
+
+    //callback combo to create an order
+    inline void create_order_i(){
+	order_win.cust_reset_vals();
+	order_win.show();
+    }
+    static void create_order(Fl_Widget*w, void*data){
+	((salesfloor*)data)->create_order_i();
+    }
+
+    //callback combo to logout
     inline void logout_clicked_i(){
 	this->hide();
+	order_win.hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){

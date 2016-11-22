@@ -34,6 +34,7 @@ class Database{
 	void addCustomer(Customer customer);
 	bool checkPin(int pin);
 	Customer loadCustomerPin(int pin);
+	int loadCustomerPinIndex(int pin);
 	int getCustomerSize();
 
 	//Salesman based things

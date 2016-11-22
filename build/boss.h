@@ -68,6 +68,9 @@ class boss : public Fl_Window{
     //callback combo to logout of the boss page
     inline void logout_clicked_i(){
 	this->hide();
+	pin_changer.hide();
+	customer_win.hide();
+	sales_win.hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){

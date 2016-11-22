@@ -54,6 +54,8 @@ class sysadmin : public Fl_Window{
     //this is the callback combo to logout of the sstem admin window
     inline void logout_clicked_i(){
 	this->hide();
+	boss_win.hide();
+	pmpin_win.hide();
 	((this->parent())->child(0))->show();
     }
     static void logout_clicked(Fl_Widget*w, void*data){

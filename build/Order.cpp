@@ -8,6 +8,10 @@ int Order::getCustomerPin(){
     return Order::customerpin;
 }
 
+int Order::getAssociatePin(){
+    return Order::associatepin;
+}
+
 int Order::getModelNumber(){
     return Order::ModelNumber;
 }
@@ -29,6 +33,11 @@ void Order::setModelNumber(int MN){
 
 void Order::setCustomerPin(int pin){
     Order::customerpin = pin;
+}
+
+
+void Order::setAssociatePin(int pin){
+    Order::associatepin = pin;
 }
 
 void Order::setQuantity(int quan){

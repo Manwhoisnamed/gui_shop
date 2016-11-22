@@ -14,6 +14,7 @@ class Order{
     private:
 	int customerpin;
 	int ModelNumber;
+	int associatepin;
 	int quantity;
 	double price;
     public:
@@ -21,12 +22,14 @@ class Order{
 
 	//getters
 	int getCustomerPin();
+	int getAssociatePin();
 	int getQuantity();
 	int getModelNumber();
 	double getPrice();
 	
 	//setters
 	void setCustomerPin(int pin);
+	void setAssociatePin(int pin);
 	void setQuantity(int num);
 	void setModelNumber(int MN);
 	void calculatePrice(Storage storage);
