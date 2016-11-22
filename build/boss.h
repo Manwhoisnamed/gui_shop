@@ -17,6 +17,7 @@
 #include "gui_salesman.h"
 #include "view_model.h"
 #include "view_all_SA.h"
+#include "view_all_C.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
@@ -28,6 +29,7 @@ class boss : public Fl_Window{
     gui_salesman sales_win;
     view_model model_view;
     view_all_SA allSA_view;
+    view_all_C allC_view;
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
@@ -35,8 +37,7 @@ class boss : public Fl_Window{
 	{0},
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},	
 	{"&Create Customer",FL_ALT+'c', create_customer, this},
-	{"&View all Customers", FL_ALT + 'v', 0, 0},
-	{"View &Orders by Customer",FL_ALT+'o', 0, 0},
+	{"&View all Customers", FL_ALT + 'v', view_allC_view, this},
 	{0},
 	{"&Sales Associates",FL_ALT+'s', 0, 0, FL_SUBMENU},	
 	{"&Create Associate",FL_ALT+'c', create_salesman, this},
@@ -53,6 +54,7 @@ class boss : public Fl_Window{
     inline void hide_all_i(){
 	model_view.hide();
 	allSA_view.hide();
+	allC_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((boss*)data)->hide_all_i();
@@ -108,6 +110,15 @@ class boss : public Fl_Window{
 	((boss*)data)->view_model_view_i();
     }
 
+    //callback combo to view the models
+    inline void view_allC_view_i(){
+	hide_all_i();
+	allC_view.reset_values();
+	allC_view.show();	
+    }
+    static void view_allC_view(Fl_Widget*w, void*data){
+	((boss*)data)->view_allC_view_i();
+    }
 
     //callback combo to view the models
     inline void view_allSA_view_i(){
@@ -128,6 +139,8 @@ class boss : public Fl_Window{
 	    logout.callback(logout_clicked, this);
 	    this->add(model_view);
 	    this->add(allSA_view);
+	    this->add(allC_view);
+	    allC_view.hide();
 	    allSA_view.hide();
 	    model_view.hide();
         };

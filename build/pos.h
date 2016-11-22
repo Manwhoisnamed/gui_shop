@@ -15,6 +15,7 @@
 #include "gui_customer.h"
 #include "gui_order.h"
 #include "view_model.h"
+#include "view_all_C.h"
 
 #ifndef __pos_H
 #define __pos_H 2016
@@ -24,10 +25,11 @@ class pos : public Fl_Window{
     gui_customer customer_win;
     gui_order order_win;
     view_model model_view;
+    view_all_C allC_view;
     Fl_Menu_Item commands[20] = {
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},
 	{"Create &Customer",FL_ALT+'c', create_customer, this},
-	{"&View Customers",FL_ALT+'v', 0, 0},
+	{"&View Customers",FL_ALT+'v', view_allC_view, this},
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
 	{"Create &Order",FL_ALT+'o', create_order, this},
@@ -42,10 +44,20 @@ class pos : public Fl_Window{
 
     //callback combo to view models
     inline void hide_all_i(){
+	allC_view.hide();
 	model_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((pos*)data)->hide_all_i();
+    }
+
+    //callback combo to hide all
+    inline void view_allC_view_i(){
+	allC_view.show();
+	allC_view.reset_values();
+    }
+    static void view_allC_view(Fl_Widget*w, void*data){
+	((pos*)data)->view_allC_view_i();
     }
 
     //callback combo to hide all
@@ -96,6 +108,8 @@ class pos : public Fl_Window{
 	    logout.callback(logout_clicked, this);
 	    this->add(model_view);
 	    model_view.hide();
+	    this->add(allC_view);
+	    allC_view.hide();
         };
 };
 #endif

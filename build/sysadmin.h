@@ -15,6 +15,7 @@
 #include "gui_PMPin.h"
 #include "gui_bosspin.h"
 #include "view_all_SA.h"
+#include "view_all_C.h"
 
 #ifndef __sysadmin_H
 #define __sysadmin_H 2016
@@ -24,11 +25,12 @@ class sysadmin : public Fl_Window{
     gui_PMPin pmpin_win;
     gui_bosspin boss_win;
     view_all_SA allSA_view;
+    view_all_C allC_view;
     Fl_Menu_Item commands[16] = {
 	{"&Maintain System",FL_ALT+'m', 0, 0, FL_SUBMENU},
 	{"Change &Boss Pin",FL_ALT+'b', change_boss, this},
 	{"Change &Project Manager Pin",FL_ALT+'p', change_pm, this},
-	{"View &Customer Pins",FL_ALT+'c', 0, 0},
+	{"View &Customer Pins",FL_ALT+'c', view_allC_view, this},
 	{"View &Sales Associate Pins",FL_ALT+'s', view_allSA_view, this},
 	{"Close &viewers",FL_ALT+'v', hide_all, this},
 	{0},
@@ -38,9 +40,20 @@ class sysadmin : public Fl_Window{
     //this is to show the SA viewer
     inline void hide_all_i(){
 	allSA_view.hide();
+	allC_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((sysadmin*)data)->hide_all_i();
+    }
+
+    //this is to show the SA viewer
+    inline void view_allC_view_i(){
+	hide_all_i();
+	allC_view.reset_values();
+	allC_view.show();
+    }
+    static void view_allC_view(Fl_Widget*w, void*data){
+	((sysadmin*)data)->view_allC_view_i();
     }
 
     //this is to show the SA viewer
@@ -92,7 +105,9 @@ class sysadmin : public Fl_Window{
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
 	    this->add(allSA_view);
-	    allSA_view.hide();
+	    allSA_view.hide();	    
+	    this->add(allC_view);
+	    allC_view.hide();
         };
 };
 #endif

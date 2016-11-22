@@ -105,7 +105,7 @@ class view_all_SA : public Fl_Group{
 	SN(400, 130, 200, 25, "Pin"),
 	cost(400, 160, 200, 25, "Wage (USD)"),
 	part(450, 30, 100, 25, "Viewing Associates"),
-	SN_choice(105, 100, 175, 25, "Part Selector"){
+	SN_choice(105, 100, 175, 25, "Selector"){
 	    reset_values();
 	    up.deactivate();
 	    up.callback(up_clicked,this);
