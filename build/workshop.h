@@ -24,6 +24,7 @@
 #include "view_battery.h"
 #include "view_torso.h"
 #include "gui_PMPin.h"
+#include "view_model.h"
 
 #ifndef __workshop_H
 #define __workshop_H 2016
@@ -42,6 +43,7 @@ class workshop : public Fl_Window{
     view_battery battery_view;
     view_torso torso_view;
     gui_PMPin pin_win;
+    view_model model_view;
     Fl_Menu_Item manage[21] = {
 	{"&Workshop",FL_ALT+'w', 0, 0, FL_SUBMENU},
 	{"Create &Arm",FL_ALT+'a', make_gui_arm, this},
@@ -57,7 +59,7 @@ class workshop : public Fl_Window{
 	{"View &Head",FL_ALT+'h', view_head_view, this},
 	{"View &Leg",FL_ALT+'l', view_leg_view, this},
 	{"View &Torso",FL_ALT+'t', view_torso_view, this, FL_MENU_DIVIDER},
-	{"View &RoboModel",FL_ALT+'r', 0, 0},
+	{"View &RoboModel",FL_ALT+'r', view_model_view, this},
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
 	{"Stop &Viewing",FL_ALT+'v', hide_all, this},
@@ -73,6 +75,16 @@ class workshop : public Fl_Window{
     }
     static void change_pin(Fl_Widget*w, void*data){
 	((workshop*)data)->change_pin_i();
+    }
+
+    //callback combo for the view model button
+    inline void view_model_view_i(){
+	hide_all_i();
+	model_view.reset_values();
+	model_view.show();
+    }
+    static void view_model_view(Fl_Widget*w, void*data){
+	((workshop*)data)->view_model_view_i();
     }
 
     //callback combo for the view torso button
@@ -139,6 +151,7 @@ class workshop : public Fl_Window{
     battery_view.hide();
     torso_view.hide();
     pin_win.hide();
+    model_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((workshop*)data)->hide_all_i();
@@ -216,11 +229,13 @@ class workshop : public Fl_Window{
 	    this->add(head_view);
 	    this->add(battery_view);
 	    this->add(torso_view);
+	    this->add(model_view);
 	    arm_view.hide();
 	    leg_view.hide();
 	    head_view.hide();
 	    battery_view.hide();
 	    torso_view.hide();
+	    model_view.hide();
         };
 };
 #endif

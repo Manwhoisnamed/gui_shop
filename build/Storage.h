@@ -52,6 +52,13 @@
     RoboModel getRoboModel(int i);
     RoboModel getRoboModelMN(int MN);
 
+    //THE PIN GETTER SUITE
+    Arm getArmPin(int i);
+    Leg getLegPin(int i);
+    Battery getBatteryPin(int i);
+    Torso getTorsoPin(int i);
+    Head getHeadPin(int i);
+
     //persistence
     void load();
     void store();

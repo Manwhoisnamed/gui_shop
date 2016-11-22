@@ -348,6 +348,51 @@ void Storage::load(){
    myfile.close();
 }
 
+Arm Storage::getArmPin(int SN){
+    int i = 0; 
+    for(i = 0; i < arms.size(); i ++){
+	if(SN == arms.at(i).getSN()){
+	    return arms.at(i);
+	}
+    }
+}
+
+Leg Storage::getLegPin(int SN){
+    int i = 0; 
+    for(i = 0; i < legs.size(); i ++){
+	if(SN == legs.at(i).getSN()){
+	    return legs.at(i);
+	}
+    }
+}
+
+Torso Storage::getTorsoPin(int SN){
+    int i = 0; 
+    for(i = 0; i < torsos.size(); i ++){
+	if(SN == torsos.at(i).getSN()){
+	    return torsos.at(i);
+	}
+    }
+}
+
+Battery Storage::getBatteryPin(int SN){
+    int i = 0; 
+    for(i = 0; i < batteries.size(); i ++){
+	if(SN == batteries.at(i).getSN()){
+	    return batteries.at(i);
+	}
+    }
+}
+
+Head Storage::getHeadPin(int SN){
+    int i = 0; 
+    for(i = 0; i < heads.size(); i ++){
+	if(SN == heads.at(i).getSN()){
+	    return heads.at(i);
+	}
+    }
+}
+
 bool Storage::checkLegs(int SN){
     int i = 0; 
     for(i = 0; i < legs.size(); i ++){

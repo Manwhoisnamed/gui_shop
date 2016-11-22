@@ -115,6 +115,7 @@ class view_leg : public Fl_Group{
 		    SN_choice.add((storage.getLeg(x).getName() + " - " + to_string(storage.getLeg(x).getSN())).c_str());
 		}
 	    }
+	    size = storage.legSize();
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
 	    ((view_leg*)data)->refresh_clicked_i();

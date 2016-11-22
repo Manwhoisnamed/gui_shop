@@ -119,6 +119,7 @@ class view_arm : public Fl_Group{
 		    SN_choice.add((storage.getArm(x).getName() + " - " + to_string(storage.getArm(x).getSN())).c_str());
 		}
 	    }
+	    size = storage.armSize();
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
 	    ((view_arm*)data)->refresh_clicked_i();

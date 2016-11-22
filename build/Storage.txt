@@ -78,6 +78,12 @@ asdg
 
 -2end
 default
+987 54 987 4 1
+laser beam
+this has a laser lol
+
+-2end
+placeholder
 -1
 TORSOS========================
 100 20 2 4 1
@@ -150,5 +156,19 @@ ROBOMODELS=====================
 39 -1 -1 
 modelly model
 ahred
+-2end
+645 654 434343434 9875.12 3254
+45 -1 
+123 -1 -1 
+best model
+THis is is
+the bestest 
+model
+-2end
+987 654 100 1800 8754
+145 1337 
+123 -1 -1 
+laser
+this is cool
 -2end
 -1

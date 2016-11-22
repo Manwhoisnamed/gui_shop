@@ -111,6 +111,7 @@ class view_torso : public Fl_Group{
 		    SN_choice.add((storage.getTorso(x).getName() + " - " + to_string(storage.getTorso(x).getSN())).c_str());
 		}
 	    }
+	    size = storage.torsoSize();
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
 	    ((view_torso*)data)->refresh_clicked_i();

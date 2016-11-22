@@ -107,6 +107,7 @@ class view_battery : public Fl_Group{
 		    SN_choice.add((storage.getBattery(x).getName() + " - " + to_string(storage.getBattery(x).getSN())).c_str());
 		}
 	    }
+	    size = storage.batterySize();
 	};
 	static void refresh_clicked(Fl_Widget* w, void* data){
 	    ((view_battery*)data)->refresh_clicked_i();
