@@ -3,6 +3,7 @@
 
 #include "globals.h"
 #include "father.h"
+#include <iostream>
 
 int main(void){
     storage.load();

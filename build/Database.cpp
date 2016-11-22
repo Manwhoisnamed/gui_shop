@@ -19,6 +19,10 @@ int Database::getCustomerSize(){
     return customers.size();
 }
 
+int Database::getAssociateSize(){
+    return associates.size();
+}
+
 int Database::getBossPin(){
     return bossPin;
 }
@@ -31,6 +35,10 @@ Customer Database::loadCustomer(int i){
 	return Database::customers.at(i);
 }
 
+salesman Database::loadAssociate(int i){
+	return Database::associates.at(i);
+}
+
 Customer Database::loadCustomerPin(int pin){
     int i = 0;
     for(i = 0; i < Database::customers.size(); i ++){
@@ -40,14 +48,37 @@ Customer Database::loadCustomerPin(int pin){
     }
 }
 
+salesman Database::loadAssociatePin(int pin){
+    int i = 0;
+    for(i = 0; i < Database::associates.size(); i ++){
+	if(associates.at(i).getPin() == pin){
+	    return associates.at(i);
+	}
+    }
+}
+
 void Database::addCustomer(Customer customer){
 	Database::customers.push_back(customer);
+}
+
+void Database::addAssociate(salesman associate){
+	Database::associates.push_back(associate);
 }
 
 bool Database::checkPin(int pin){
     int i = 0;
     for(i = 0; i < Database::customers.size(); i ++){
 	if(customers.at(i).getPin() == pin){
+	    return true;
+	}
+    }
+    return false;
+}
+
+bool Database::checkPinSales(int pin){
+    int i = 0;
+    for(i = 0; i < Database::associates.size(); i ++){
+	if(associates.at(i).getPin() == pin){
 	    return true;
 	}
     }
@@ -71,6 +102,13 @@ void Database::saveData(){
 	myfile << orders.at(i).getCustomerPin() << " " << orders.at(i).getModelNumber() << " " << orders.at(i).getQuantity() << "\n";
     }
     myfile << "-1\n";
+    myfile << "Associates===============\n";
+    for(i = 0; i < Database::associates.size(); i ++){
+	myfile << associates.at(i).getName() << "\n";
+	myfile << associates.at(i).getPin() << "\n";
+	myfile << associates.at(i).getWage() << "\n";	
+    }
+    myfile << "-1\n";
     myfile.close();
 }
 
@@ -78,12 +116,14 @@ void Database::loadData(Storage storage){
     ifstream myfile("Database.txt");
     string line, name, address;
     int pin, MN, quantity;
+    double wage;
   
     //gets the boss and pm pin
     getline(myfile, line);
     istringstream pins(line);
     pins >> bossPin >> PMPin;
 
+    cout << "Loading Customers\n";
     //gets the customers
     getline(myfile, line);
     while(true){
@@ -98,6 +138,9 @@ void Database::loadData(Storage storage){
 	Customer customer(name, pin, address);
 	Database::customers.push_back(customer);
     }
+
+    cout << "Loading orders\n";
+    //gets the orders
     getline(myfile, line);
     while(true){
 	getline(myfile, line);
@@ -113,5 +156,27 @@ void Database::loadData(Storage storage){
 	order.calculatePrice(storage);
 	Database::orders.push_back(order);
     }
+
+    cout << "Loading Salesmen\n";
+    //gets the salesmen
+    getline(myfile, line);
+    while(true){
+	getline(myfile,name);
+	if(name == "-1"){
+	    break;
+	}
+	salesman associate;
+	associate.setName(name);
+	getline(myfile,line);
+	istringstream pinLine(line);
+	pinLine >> pin;
+	associate.setPin(pin);
+	getline(myfile,line);
+	istringstream wageLine(line);
+	wageLine >> wage;
+	associate.setWage(wage);
+	addAssociate(associate);
+    }
+
     myfile.close();
 }

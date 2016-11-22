@@ -10,6 +10,7 @@
 
 Storage storage;
 Database database;
+int currentpin;
 
 bool isInt(const char* word){
     int len = strlen(word);

@@ -10,6 +10,7 @@
 #include <Fl/Fl_Menu_Item.H>
 #include <Fl/Fl_Choice.H>
 #include "globals.h"
+#include <iostream>
 
 #ifndef __login_H
 #define __login_H 2016
@@ -34,11 +35,13 @@ class login : public Fl_Window{
 	}
 	else if(clearance.value() == 1 && database.checkPin(atoi(pin_field.value()))){
        	    this->hide();
+	    currentpin = atoi(pin_field.value());
 	    response.label("");
 	    ((this->parent())->child(3))->show();
 	}
-	else if(clearance.value() == 2 && strcmp(pin_field.value(),"1337") == 0){
+	else if(clearance.value() == 2 && database.checkPinSales(atoi(pin_field.value()))){
        	    this->hide();
+	    currentpin = atoi(pin_field.value());
 	    response.label("");
 	    ((this->parent())->child(2))->show();
 	}

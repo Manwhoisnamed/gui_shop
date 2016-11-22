@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "gui_bosspin.h"
 #include "gui_customer.h"
+#include "gui_salesman.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
@@ -22,6 +23,7 @@ class boss : public Fl_Window{
     Fl_Menu_Bar menu;
     gui_bosspin pin_changer;
     gui_customer customer_win;
+    gui_salesman sales_win;
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', 0, 0},
@@ -34,7 +36,7 @@ class boss : public Fl_Window{
 	{"&Adjust Credentials", FL_ALT + 'a', 0, 0},
 	{0},
 	{"&Sales Associates",FL_ALT+'s', 0, 0, FL_SUBMENU},	
-	{"&Create Associate",FL_ALT+'c', 0, 0},
+	{"&Create Associate",FL_ALT+'c', create_salesman, this},
 	{"&View all Associates", FL_ALT + 'v', 0, 0},
 	{"View &Orders by Associates",FL_ALT+'o', 0, 0},
 	{"&Adjust Pay", FL_ALT + 'a', 0, 0},
@@ -52,6 +54,15 @@ class boss : public Fl_Window{
     }
     static void create_customer(Fl_Widget*w, void*data){
 	((boss*)data)->create_customer_i();
+    }
+
+    //callback combo to create a salesman
+    inline void create_salesman_i(){
+	sales_win.reset_vals();
+	sales_win.show();
+    }
+    static void create_salesman(Fl_Widget*w, void*data){
+	((boss*)data)->create_salesman_i();
     }
 
     //callback combo to logout of the boss page

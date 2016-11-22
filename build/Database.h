@@ -8,6 +8,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "salesman.h"
 
  #ifndef __DATABASE_H
  #define __DATABASE_H 2016
@@ -15,6 +16,7 @@ class Database{
     private:
 	vector<Customer> customers;
 	vector<Order> orders;
+	vector<salesman> associates;
 	int bossPin;
 	int PMPin;
 
@@ -33,6 +35,13 @@ class Database{
 	bool checkPin(int pin);
 	Customer loadCustomerPin(int pin);
 	int getCustomerSize();
+
+	//Salesman based things
+	salesman loadAssociate(int pin);
+	void addAssociate(salesman associate);
+	bool checkPinSales(int pin);
+	salesman loadAssociatePin(int pin);
+	int getAssociateSize();
 
         //order based things
 	void addOrder(Order order);
