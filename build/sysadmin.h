@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "gui_PMPin.h"
 #include "gui_bosspin.h"
+#include "view_all_SA.h"
 
 #ifndef __sysadmin_H
 #define __sysadmin_H 2016
@@ -22,15 +23,35 @@ class sysadmin : public Fl_Window{
     Fl_Menu_Bar menu;
     gui_PMPin pmpin_win;
     gui_bosspin boss_win;
+    view_all_SA allSA_view;
     Fl_Menu_Item commands[16] = {
 	{"&Maintain System",FL_ALT+'m', 0, 0, FL_SUBMENU},
 	{"Change &Boss Pin",FL_ALT+'b', change_boss, this},
 	{"Change &Project Manager Pin",FL_ALT+'p', change_pm, this},
 	{"View &Customer Pins",FL_ALT+'c', 0, 0},
-	{"View &Sales Associate Pins",FL_ALT+'s', 0, 0},
+	{"View &Sales Associate Pins",FL_ALT+'s', view_allSA_view, this},
+	{"Close &viewers",FL_ALT+'v', hide_all, this},
 	{0},
 	{0},
     };
+
+    //this is to show the SA viewer
+    inline void hide_all_i(){
+	allSA_view.hide();
+    }
+    static void hide_all(Fl_Widget*w, void*data){
+	((sysadmin*)data)->hide_all_i();
+    }
+
+    //this is to show the SA viewer
+    inline void view_allSA_view_i(){
+	hide_all_i();
+	allSA_view.reset_values();
+	allSA_view.show();
+    }
+    static void view_allSA_view(Fl_Widget*w, void*data){
+	((sysadmin*)data)->view_allSA_view_i();
+    }
 
     //this is the callback combo to change the project manager pin
     inline void change_pm_i(){
@@ -54,6 +75,7 @@ class sysadmin : public Fl_Window{
     //this is the callback combo to logout of the sstem admin window
     inline void logout_clicked_i(){
 	this->hide();
+	hide_all_i();
 	boss_win.hide();
 	pmpin_win.hide();
 	((this->parent())->child(0))->show();
@@ -69,6 +91,8 @@ class sysadmin : public Fl_Window{
 	menu(0,0,1000,20){
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
+	    this->add(allSA_view);
+	    allSA_view.hide();
         };
 };
 #endif

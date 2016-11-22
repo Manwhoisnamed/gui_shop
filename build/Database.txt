@@ -35,4 +35,10 @@ Associates===============
 maxwell man mcgee
 654321
 45
+jimbo
+8754
+654
+bobman
+54
+987654
 -1

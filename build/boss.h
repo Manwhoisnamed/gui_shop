@@ -16,6 +16,7 @@
 #include "gui_customer.h"
 #include "gui_salesman.h"
 #include "view_model.h"
+#include "view_all_SA.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
@@ -26,6 +27,7 @@ class boss : public Fl_Window{
     gui_customer customer_win;
     gui_salesman sales_win;
     view_model model_view;
+    view_all_SA allSA_view;
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', view_model_view, this},
@@ -35,13 +37,11 @@ class boss : public Fl_Window{
 	{"&Create Customer",FL_ALT+'c', create_customer, this},
 	{"&View all Customers", FL_ALT + 'v', 0, 0},
 	{"View &Orders by Customer",FL_ALT+'o', 0, 0},
-	{"&Adjust Credentials", FL_ALT + 'a', 0, 0},
 	{0},
 	{"&Sales Associates",FL_ALT+'s', 0, 0, FL_SUBMENU},	
 	{"&Create Associate",FL_ALT+'c', create_salesman, this},
-	{"&View all Associates", FL_ALT + 'v', 0, 0},
+	{"&View all Associates", FL_ALT + 'v', view_allSA_view, this},
 	{"View &Orders by Associates",FL_ALT+'o', 0, 0},
-	{"&Adjust Pay", FL_ALT + 'a', 0, 0},
 	{0},
 	{"&Help",FL_ALT+'h', 0, 0, FL_SUBMENU},	
 	{"&Stop Viewing",FL_ALT+'s', hide_all, this},
@@ -52,6 +52,7 @@ class boss : public Fl_Window{
     //callback combo to hide_all_windows and groups
     inline void hide_all_i(){
 	model_view.hide();
+	allSA_view.hide();
     }
     static void hide_all(Fl_Widget*w, void*data){
 	((boss*)data)->hide_all_i();
@@ -107,6 +108,17 @@ class boss : public Fl_Window{
 	((boss*)data)->view_model_view_i();
     }
 
+
+    //callback combo to view the models
+    inline void view_allSA_view_i(){
+	hide_all_i();
+	allSA_view.reset_values();
+	allSA_view.show();	
+    }
+    static void view_allSA_view(Fl_Widget*w, void*data){
+	((boss*)data)->view_allSA_view_i();
+    }
+
   public:
 	boss() :
 	Fl_Window(1000,700),
@@ -115,6 +127,8 @@ class boss : public Fl_Window{
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
 	    this->add(model_view);
+	    this->add(allSA_view);
+	    allSA_view.hide();
 	    model_view.hide();
         };
 };

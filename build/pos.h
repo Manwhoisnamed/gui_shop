@@ -36,7 +36,6 @@ class pos : public Fl_Window{
 	{0},
 	{"&Help", FL_ALT+ 'h', 0,0, FL_SUBMENU},
 	{"&Clear Viewer", FL_ALT + 'c', hide_all,this},
-	{"Change &Name", FL_ALT + 'n', 0,0},
 	{0},
 	{0}
     };
