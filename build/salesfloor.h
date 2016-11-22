@@ -46,5 +46,7 @@ class salesfloor : public Fl_Window{
 	    menu.menu(commands);
 	    logout.callback(logout_clicked, this);
         };
+
+
 };
 #endif
