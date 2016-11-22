@@ -13,6 +13,7 @@
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
 #include "gui_bosspin.h"
+#include "gui_customer.h"
 
 #ifndef __boss_H
 #define __boss_H 2016
@@ -20,13 +21,14 @@ class boss : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
     gui_bosspin pin_changer;
+    gui_customer customer_win;
     Fl_Menu_Item commands[30] = {
 	{"&Business",FL_ALT+'b', 0, 0, FL_SUBMENU},
 	{"View &Catalogue",FL_ALT+'c', 0, 0},
 	{"&View all orders",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},	
-	{"&Create Customer",FL_ALT+'c', 0, 0},
+	{"&Create Customer",FL_ALT+'c', create_customer, this},
 	{"&View all Customers", FL_ALT + 'v', 0, 0},
 	{"View &Orders by Customer",FL_ALT+'o', 0, 0},
 	{"&Adjust Credentials", FL_ALT + 'a', 0, 0},
@@ -42,6 +44,15 @@ class boss : public Fl_Window{
 	{"&Change Pin",FL_ALT+'c', change_pin, this},	
 	{0},
     };
+
+    //callback combo to create a customer
+    inline void create_customer_i(){
+	customer_win.reset_vals();
+	customer_win.show();
+    }
+    static void create_customer(Fl_Widget*w, void*data){
+	((boss*)data)->create_customer_i();
+    }
 
     //callback combo to logout of the boss page
     inline void logout_clicked_i(){

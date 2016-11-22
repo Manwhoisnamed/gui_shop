@@ -10,6 +10,9 @@
 #include <Fl/Fl_Multiline_Input.H>
 #include <Fl/Fl_Choice.H>
 #include <Fl/Fl_Menu_Item.H>
+#include <string>
+
+using namespace std;
 
 #ifndef __gui_model_H
 #define __gui_model_H 2016
@@ -569,6 +572,149 @@ class gui_model: public Fl_Window{
  	((gui_model*)data)->bat3_select_i();
     }
     
+    //callback combo for the confirm button
+    inline void create_clicked_i(){
+	bool valid = true;
+	int headSN;
+	int legSN;
+	int torsoSN;
+	int arm1SN;
+	int arm2SN = -1;
+	int bat1SN;
+	int bat2SN = -1;
+	int bat3SN = -1;
+	int iMN;
+	double iprice;
+	RoboModel robomodel;
+	if(head_pin.value() == 0){
+	    head_name.labelcolor(FL_RED);
+	    head_name.label("Head");
+	    valid = false;
+	}
+	else{
+	    headSN = storage.getHead(head_pin.value() - 1).getSN();
+	    head_name.labelcolor(FL_BLACK);
+	    head_name.label("Head");
+	}
+
+	if(leg_pin.value() == 0){
+	    leg_name.labelcolor(FL_RED);
+	    leg_name.label("Leg");
+	    valid = false;
+	}
+	else{
+	    legSN = storage.getLeg(leg_pin.value() - 1).getSN();
+	    leg_name.labelcolor(FL_BLACK);
+	    leg_name.label("Leg");
+	}
+
+	if(torso_pin.value() == 0){
+	    torso_name.labelcolor(FL_RED);
+	    torso_name.label("Torso");
+	    valid = false;
+	}
+	else{
+	    torsoSN = storage.getTorso(torso_pin.value() - 1).getSN();
+	    torso_name.labelcolor(FL_BLACK);
+	    torso_name.label("Torso");
+	}
+
+	if(arm1_pin.value() == 0){
+	    arm1_name.labelcolor(FL_RED);
+	    arm1_name.label("Arm 1");
+	    valid = false;
+	}
+	else{
+	    arm1SN = storage.getArm(arm1_pin.value() - 1).getSN();
+	    arm1_name.labelcolor(FL_BLACK);
+	    arm1_name.label("Arm 1");
+	}
+
+	if(bat1_pin.value() == 0){
+	    bat1_name.labelcolor(FL_RED);
+	    bat1_name.label("Battery 1");
+	    valid = false;
+	}
+	else{
+	    bat1SN = storage.getBattery(bat1_pin.value() - 1).getSN();
+	    bat1_name.labelcolor(FL_BLACK);
+	    bat1_name.label("Battery 1");
+	}
+
+	if(strlen(description.value()) == 0){
+	    valid = false;
+	    description_error.label("Needs\nDescription");
+	}
+	else{
+	    description_error.label("");
+	}
+
+	if(!isInt(MN.value())){
+	    valid = false;
+	    MN_error.label("Needs Int");
+	}
+	else if(storage.checkRoboModels(atoi(MN.value()))){
+	    valid = false;
+	    MN_error.label("MN in use");
+	}
+	else{
+	    iMN = atoi(MN.value());
+	    MN_error.label("");
+	}
+
+	if(!isDouble(price.value())){
+	    valid = false;
+	    price_error.label("Needs Double");
+	}
+	else{
+	    iprice = atof(price.value());
+	    price_error.label("");
+	}
+
+	if(strlen(name.value()) == 0){
+	    valid = false;
+	    name_error.label("Needs Name");
+	}
+	else{
+	    name_error.label("");
+	}
+
+	if(valid){
+	    robomodel.setHead(headSN);
+	    robomodel.setLeg(legSN);
+	    robomodel.setTorso(torsoSN);
+	    robomodel.addArm(arm1SN);
+	    robomodel.addBattery(bat1SN);
+	    robomodel.setMN(iMN);
+	    robomodel.setPrice(iprice);
+	    robomodel.setName(name.value());
+	    robomodel.setDescription(description.value());
+	    if(arm2_pin.active() && arm2_pin.value() != 0){
+		robomodel.addArm(storage.getArm(arm2_pin.value() - 1).getSN());
+	    }
+	    else{
+		robomodel.addArm(-1);
+	    }
+	    if(bat2_pin.active() && bat2_pin.value() != 0){
+		robomodel.addBattery(storage.getBattery(bat2_pin.value() - 1).getSN());
+	    }
+	    else{
+		robomodel.addBattery(-1);
+	    }
+	    if(bat3_pin.active() && bat3_pin.value() != 0){
+		robomodel.addBattery(storage.getBattery(bat3_pin.value() - 1).getSN());
+	    }
+	    else{
+		robomodel.addBattery(-1);
+	    }
+	    storage.addRoboModel(robomodel);
+	    storage.store();
+	    this->hide();
+	}
+    }
+    static void create_clicked(Fl_Widget *w, void* data){
+	((gui_model*)data)->create_clicked_i();
+    }
 
     public:
 	gui_model():
@@ -605,13 +751,13 @@ class gui_model: public Fl_Window{
 	cost(500,215,100,25,"Cost (USD)"),
 	weight(500,245,100,25,"Weight (Kg)"),
 	name(50, 285, 100, 25, "Name"),
-	name_error(155, 285, 100, 25, "Needs Name"),
+	name_error(155, 285, 100, 25, ""),
 	price(305, 285, 100, 25, "Price"),
-	price_error(405, 285, 100,25, "Need Double"),
+	price_error(405, 285, 100,25, ""),
 	MN(625, 285, 100, 25, "Model Number"),
-	MN_error(730, 285, 100,25, "Need Integer"),
+	MN_error(730, 285, 100,25, ""),
 	description(690, 175, 175, 100, "Description"),
-	description_error(590, 175, 125, 25, "Test"),
+	description_error(586, 175, 125, 30, ""),
 	create(870, 255, 100, 25, "Create"),
 	cancel(870, 285, 100, 25, "Cancel"){
 	    div1.box(FL_UP_BOX);
@@ -635,6 +781,7 @@ class gui_model: public Fl_Window{
 	    bat2_pin.callback(bat2_select, this);
 	    bat3_pin.callback(bat3_select, this);
 	    refresh.callback(refresh_choices, this);
+	    create.callback(create_clicked, this);
 	}
 		
 	void reset_values(){

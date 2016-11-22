@@ -14,7 +14,16 @@
  #define __ROBOMODEL_H 2016
  class RoboModel {
   public:
-    RoboModel(){};    
+    RoboModel(int headSN, int legSN, int torsoSN, int armSN, int batSN, int iMN, double iprice):
+	head(headSN),
+	leg(legSN),
+	torso(torsoSN),
+	MN(iMN),
+	price(iprice){
+	arms.push_back(armSN);
+	batteries.push_back(batSN);     
+    };    
+    RoboModel(){};
 
     void setHead(int head);
     void setLeg(int leg);
@@ -43,7 +52,6 @@
     int getBatteryCount();
 
   private:
-    int batterySpace;
     int head;
     int leg;
     int torso;

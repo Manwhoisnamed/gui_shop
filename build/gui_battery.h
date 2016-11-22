@@ -114,7 +114,7 @@ class gui_battery : public Fl_Window{
 	SN(150,35,100,25, "SN"),
 	cost(150,65,100,25, "Cost (USD)"),
 	weight(150,95,100,25, "Weight (KG)"),
-	charge(150,125,100,25, "Active Draw (KW)"),
+	charge(150,125,100,25, "Charge (KW)"),
 	description(150,155,175,125,"Description"),
 	cancel(295, 295, 100, 25, "Cancel"),
 	create(190, 295, 100, 25, "Create"),

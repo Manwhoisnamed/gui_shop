@@ -149,6 +149,24 @@ void Storage::store(){
     	myfile << "-2end\n";
     }
     myfile << "-1\n";
+
+    //stores batteries
+    myfile << "ROBOMODELS=====================\n";
+    for(i = 0; i < Storage::robomodels.size();i ++){
+	myfile << robomodels.at(i).getHead() << " " << robomodels.at(i).getLeg() << " " << robomodels.at(i).getTorso() << " " << robomodels.at(i).getPrice() << " " << robomodels.at(i).getMN() << "\n";
+	for(j = 0; j < 2; j++){
+	    myfile << robomodels.at(i).getArm(j) << " ";
+	} 
+	myfile << "\n";
+	for(j = 0; j < 3; j++){
+	    myfile << robomodels.at(i).getBattery(j) << " ";
+	} 
+	myfile << "\n";
+        myfile << robomodels.at(i).getName() << "\n";
+        myfile << robomodels.at(i).getDescription() << "\n";
+    	myfile << "-2end\n";
+    }
+    myfile << "-1\n";
     myfile.close();
 }
 
@@ -279,6 +297,52 @@ void Storage::load(){
 	}
 	Battery battery(name, SN, weight, cost, description, charge);
 	Storage::batteries.push_back(battery);
+   }
+
+   //gets the robomodel
+   getline(myfile,line);
+   while(true){
+	int headSN;
+	int legSN;
+	int torsoSN;
+	int armSN;
+	int batSN;
+	RoboModel robomodel;
+	getline(myfile, line);
+	if(line == "-1"){
+	    break;	
+	}
+	istringstream iss(line);
+	iss >> headSN >> legSN >> torsoSN >> price >> MN;
+	getline(myfile, line);
+	istringstream armline(line);
+	for(int x = 0; x < 2; x++){
+	    armline >> armSN;
+	    robomodel.addArm(armSN);	
+	}
+	getline(myfile, line);
+	istringstream batline(line);
+	for(int x = 0; x < 3; x++){
+	    batline >> batSN;
+	    robomodel.addBattery(batSN);	
+	}
+	getline(myfile,name);
+	getline(myfile,description);
+	while(true){
+	    getline(myfile,buffer);
+	    if(buffer == "-2end"){
+		break;
+	    }
+	    description += "\n" + buffer;
+	}
+	robomodel.setHead(headSN);
+	robomodel.setLeg(legSN);
+	robomodel.setTorso(torsoSN);
+	robomodel.setMN(MN);
+	robomodel.setPrice(price);
+	robomodel.setName(name);
+	robomodel.setDescription(description);
+	Storage::robomodels.push_back(robomodel);
    }
 
    myfile.close();

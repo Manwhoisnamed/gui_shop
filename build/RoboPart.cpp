@@ -1,3 +1,6 @@
+//maxwell Sanders 1001069652
+//this is the definitions file for the robopart
+
  #include "RoboPart.h"
 
  using namespace std;

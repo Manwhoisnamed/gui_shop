@@ -78,11 +78,6 @@ asdg
 
 -2end
 default
-46 654 46 21 1
-laser
-This is a vague description
--2end
-placeholder
 -1
 TORSOS========================
 100 20 2 4 1
@@ -108,6 +103,11 @@ asdfkb
 safi
 -2end
 default
+454 11 454 64 1
+sdag
+agsduha
+-2end
+placeholder
 -1
 LEGS==========================
 59 30 58 2 40 67
@@ -120,16 +120,9 @@ leg
 a leg 2
 -2end
 default
-456 34 456 9 12 1234
-leggy
-Leggy blonde, goodbye
--2end
-placeholder
-12132 21 12132 12 21 654
-leg test
-faiush
-afsugofsad
-afkbu
+54 54 54 541 987 12
+asf
+saogu
 -2end
 placeholder
 -1
@@ -149,5 +142,13 @@ this is a good meme
 2 65 2.5 12
 new bat
 fdjsygk
+-2end
+-1
+ROBOMODELS=====================
+645 59 32766 1500 97465
+45 145 
+39 -1 -1 
+modelly model
+ahred
 -2end
 -1
