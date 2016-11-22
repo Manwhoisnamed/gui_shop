@@ -103,7 +103,7 @@ class gui_customer: public Fl_Window{
     }		
 
     gui_customer():
-	Fl_Window(350, 155, "Boss Password Changer"),
+	Fl_Window(350, 155, "Customer Creator"),
 	name(125, 5, 100, 25, "Name"),
 	name_error(230, 5, 100, 25, ""),
 	address(125, 35, 100, 25, "Address"),

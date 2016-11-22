@@ -12,22 +12,41 @@
 #include <Fl/Fl_Menu.H>
 #include <Fl/Fl_Menu_Bar.H>
 #include "globals.h"
+#include "gui_customer.h"
 
 #ifndef __pos_H
 #define __pos_H 2016
 class pos : public Fl_Window{
     Fl_Button logout;   
     Fl_Menu_Bar menu;
-    Fl_Menu_Item commands[14] = {
+    gui_customer customer_win;
+    Fl_Menu_Item commands[20] = {
 	{"&Customers",FL_ALT+'c', 0, 0, FL_SUBMENU},
-	{"Create C&ustomer",FL_ALT+'u', 0, 0},
+	{"Create &Customer",FL_ALT+'c', create_customer, this},
 	{"&View Customers",FL_ALT+'v', 0, 0},
 	{0},
 	{"&Orders",FL_ALT+'o', 0, 0, FL_SUBMENU},	
-	{"&Create Order",FL_ALT+'c', 0, 0},
-	{"&View Orders",FL_ALT+'v', 0, 0},
-	{"&View Catalogue",FL_ALT+'c', 0, 0},
+	{"Create &Order",FL_ALT+'o', 0, 0},
+	{"View My &Sales",FL_ALT+'s', 0, 0},
+	{"View &Catalogue",FL_ALT+'c', 0, 0},
+	{0},
+	{"&Help", FL_ALT+ 'h', 0,0, FL_SUBMENU},
+	{"&Clear Viewer", FL_ALT + 'c', 0,0},
+	{"Change &Name", FL_ALT + 'n', 0,0},
+	{0},
+	{0}
     };
+
+    //callback combo to create a customer
+    inline void create_customer_i(){
+	customer_win.reset_vals();
+	customer_win.show();
+    }
+    static void create_customer(Fl_Widget*w, void*data){
+	((pos*)data)->create_customer_i();
+    }
+
+    //callback combo to logout
     inline void logout_clicked_i(){
 	this->hide();
 	((this->parent())->child(0))->show();
